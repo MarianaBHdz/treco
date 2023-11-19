@@ -9,3 +9,99 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id              String        @id
+  name            String        @db.VarChar(255)
+  email           String        @db.VarChar(255)
+  role            role
+  avatar_url      String?       @db.VarChar(255)
+  created_at      DateTime      @default(now()) 
+  u_coupons       Coupon[]
+  stores          Store[]
+}
+
+model Event {
+  id                Int         @id @default(autoincrement())
+  name              String      @db.VarChar(255)
+  start_date        DateTime    @db.Date
+  finish_date       DateTime    @db.Date
+  start_schedule    DateTime    @db.Time(2)
+  finish_schedule   DateTime    @db.Time(2)
+  e_coupons         Coupon[]
+  addresses         EventAddress[]
+}
+
+model Material {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(255)
+  m_coupons   Coupon[]
+}
+
+model Coupon {
+  id              Int       @id @default(autoincrement())
+  c_user_id       String
+  event_id        Int
+  material_id     Int
+  code            String    @db.VarChar(255)
+  thumbnail_url   String    @db.VarChar(255)
+  status          status
+  user            User      @relation(fields: [c_user_id], references: [id])
+  evento          Event     @relation(fields: [event_id], references: [id])
+  material        Material  @relation(fields: [material_id], references: [id])
+}
+
+model Store {
+  id                  Int        @id @default(autoincrement())
+  owner_user_id       String
+  business_name       String     @db.VarChar(255)
+  name_store_manager  String     @db.VarChar(255)
+  avatar_url          String?    @db.VarChar(255)
+  store_email         String     @db.VarChar(255)
+  description         String?    @db.VarChar(255)
+  store_number        String     @db.VarChar(255)
+  user                User       @relation(fields: [owner_user_id], references: [id])
+  products            Product[]
+}
+
+model Product {
+  id              Int        @id @default(autoincrement())
+  store_id        Int
+  name            String     @db.VarChar(255)
+  thumbnail_url   String     @db.VarChar(255)
+  store           Store      @relation(fields: [store_id], references: [id])
+}
+
+model EventAddress {
+  id                  Int     @id @default(autoincrement())
+  event_id            Int
+  postal_code         Int
+  state               String  @db.VarChar(255)
+  delegation          String  @db.VarChar(255)
+  neighborhood        String  @db.VarChar(255)
+  street              String  @db.VarChar(255)
+  apartment_number    Int
+  street_numer        Int
+  recipients_name     String  @db.VarChar(255)
+  references          String  @db.VarChar(255)
+  event               Event   @relation(fields: [event_id], references: [id])
+}
+
+model Idea {
+  id             Int     @id @default(autoincrement())
+  material_id    Int
+  name           String  @db.VarChar(255)
+  steps          String  @db.VarChar(255)
+  thumbnail_url  String  @db.VarChar(255)
+}
+
+enum role {
+  SELLER
+  CONSUMER
+  ADMIN
+}
+
+enum status {
+  AVAILABLE
+  USED
+}
