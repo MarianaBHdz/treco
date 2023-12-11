@@ -1,0 +1,79 @@
+*{
+  margin: 0;
+  padding: 0;    
+}
+  
+html, body {
+  font-size: 20px;
+  background-color: #ffffff;
+  font-family: Inter, Lato, sans-serif;
+  overflow-y: hidden;
+}
+.cargando-Proofile {
+  font-family: Inter, Lato, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 29px;
+  align-items: center;
+  align-content: center;
+  margin-left: 50%;
+  margin-top: 25%;
+}
+
+.main-Container {
+  height: 894px;
+  width: 100%;
+  margin: 0 auto;
+}
+.message-container {
+  height: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.main-Text {
+  color: #3a4d39;
+  font-family: Inter, Lato, sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  height: 80px;
+  letter-spacing: 3px;
+  line-height: 40px;
+  text-align: center;
+  position: relative;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.iconAdmin {
+  height: 191px;
+  width: 160px;
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.buttons-container {
+  position: relative;
+  height: 70px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ddbutton {
+  all: unset;
+  align-items: center;
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: inline-flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 8px 10px;
+  position: relative;
+  background-color: #739072;
+  font-family: Inter, Lato, sans-serif;
+  color: #ECE3CE;
+}

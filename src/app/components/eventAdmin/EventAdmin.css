@@ -1,0 +1,96 @@
+.event-container {
+  background-color: #73907278;
+  border: 3px solid;
+  border-color: #739072;
+  border-radius: 10px;
+  height: 131px;
+  width: 100%;
+  margin: 0 auto;
+}
+.text-container {
+  float: left;
+  height: 131px;
+  width: 80%;
+  margin: 0 auto;
+}
+.text-name {
+  color: #3a4d39;
+  font-family: Inter, Lato, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  height: 26px;
+  letter-spacing: 3px;
+  line-height: 26px;
+}
+.text-individual {
+  float: left;
+  width: 700px;
+  margin-left: 25px;
+  height: 20px;
+  width: 100%;
+}
+.text-name-event {
+  color: #3a4d39;
+  font-family: Inter, Lato, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  height: 26px;
+  line-height: 26px;
+  width: 200px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+.text-name {
+  float: left;
+  color: #3a4d39;
+  font-family: Inter, Lato, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  height: 26px;
+  width: 80px;
+  text-align: left;
+}
+.text-name-a {
+  float: left;
+  color: #3a4d39;
+  font-family: Inter, Lato, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  height: 26px;
+  line-height: 26px;
+  align-items: left;
+  justify-content: left;
+  width: 40px;
+  text-align: center;
+}
+.text-information {
+  float: left;
+  color: #000000;
+  font-family: Inter, Lato, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  height: 26px;
+  line-height: 26px;
+  width: auto;
+}
+.icon-container {
+  float: right;
+  width: auto;
+  margin-right: 20px;
+  margin-top: 6%;
+}
+.icon-edit-div {
+  float: left;
+  width: auto;
+  margin-right: 15px;
+}
+.icon-delete-div {
+  float: left;
+  width: auto;
+}
+.icon-edit {
+  color: #4F6F52;
+}
+.icon-delete {
+  color: red;
+}
