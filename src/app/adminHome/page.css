@@ -26,6 +26,11 @@ html, body {
   width: 100%;
   margin: 0 auto;
 }
+.message-container {
+  height: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
 
 .main-Text {
   color: #3a4d39;
@@ -37,16 +42,38 @@ html, body {
   line-height: 40px;
   text-align: center;
   position: relative;
-  top: 50%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .iconAdmin {
-  height: 291px;
-  width: 244px;
+  height: 191px;
+  width: 160px;
   position: absolute;
-  top: 50%;
+  top: 38%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.buttons-container {
+  position: relative;
+  height: 70px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ddbutton {
+  all: unset;
+  align-items: center;
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: inline-flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 8px 10px;
+  position: relative;
+  background-color: #739072;
+  font-family: Inter, Lato, sans-serif;
+  color: #ECE3CE;
 }
