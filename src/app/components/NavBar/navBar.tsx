@@ -2,6 +2,7 @@
 
 import './navBar.css'
 import { FaBars } from "react-icons/fa";
+import { FaCircleUser } from "react-icons/fa6";
 import{useEffect} from 'react';
 
 export default function NavBar(){
@@ -23,17 +24,19 @@ export default function NavBar(){
         return () => {
             navToggle?.removeEventListener('click', handleClick);
         };
+        
     }, []);
 
     return(
         <header className="header">
             <nav className="navbar">
-                {/* <img src="/logo.png" alt="Logo TRECO" className= "logo nav-link"/>  */}
-                <a href="#" className="logo nav-link">Treco</a>
+                <div className="logo">
+                    <img src="/logo.png" alt="Logo TRECO" className='logo-img'/>
+                </div>
                 <button className="nav-toggle" aria-label='Abrir menú'><FaBars /></button>
                 <ul className="nav-menu">
                     <li className="nav-menu-item">
-                        <a href="#" className="nav-menu-link nav-link nav-menu-link_active">Eventos</a>
+                        <a href="#" className="nav-menu-link nav-link ">Eventos</a>
                     </li>
                     <li className="nav-menu-item">
                         <a href="#" className="nav-menu-link nav-link nav-menu-link_active">Tiendas Y Productos</a>
@@ -45,13 +48,13 @@ export default function NavBar(){
                         <a href="#" className="nav-menu-link nav-link nav-menu-link_active">Conócenos</a>
                     </li>
                     <li className="nav-menu-item">
-                        <a href="#" className="nav-menu-link nav-link">Icono</a>
+                        <button className="nav-icono" aria-label='icono'><FaCircleUser /></button>
                     </li>
                     <li className="nav-menu-item">
-                        <a href="#" className="nav-menu-link nav-link nav-menu-link_active">Crea Tu Cuenta</a>
+                        <a href="/CreateAccount" className="nav-menu-link nav-link nav-menu-link_active">Crea Tu Cuenta</a>
                     </li>
                     <li className="nav-menu-item">
-                        <a href="#" className="nav-menu-link nav-link nav-menu-link_active">Iniciar Sesión</a>
+                        <a href="/Login" className="nav-menu-link nav-link nav-menu-link_active">Iniciar Sesión</a>
                     </li>
                 </ul>
             </nav>

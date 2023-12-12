@@ -1,10 +1,13 @@
-import React from 'react';
+import Carousel from "../components/Carousel/carousel"
 
-export default function Inicio() {
-  
+const imgCarousel= [
+    "https://th.bing.com/th/id/OIP.GmJVHfwlpmGFs1O4TlX50QHaE8?rs=1&pid=ImgDetMain"
+]
+
+export default function Inicio(){
     return (
-      <div>
-        <p>Hola</p>
-      </div>
-    )
-  }
+        <div>
+            <Carousel imagenes={imgCarousel}/>
+        </div>
+      )
+}
