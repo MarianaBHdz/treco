@@ -1,0 +1,32 @@
+.container-carousel{
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #ECE3CE;
+    position: fixed;
+    left: 0;
+}
+
+.container-imagenes{
+    display: flex;
+    height: 250px;
+    width: 100%;
+    align-items: center;
+}
+
+.imagen-carousel{
+    height: 250px;
+    width: auto;
+    cursor: pointer;
+}
+
+.button-carousel{
+    color:#3A4D39;
+    background: none;
+    border: none;
+    font-size: 30px;
+    line-height: 60px;
+    cursor: pointer;
+}

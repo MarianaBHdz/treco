@@ -24,6 +24,7 @@ export default function NavBar(){
         return () => {
             navToggle?.removeEventListener('click', handleClick);
         };
+        
     }, []);
 
     return(
@@ -35,7 +36,7 @@ export default function NavBar(){
                 <button className="nav-toggle" aria-label='Abrir menú'><FaBars /></button>
                 <ul className="nav-menu">
                     <li className="nav-menu-item">
-                        <a href="#" className="nav-menu-link nav-link nav-menu-link_active">Eventos</a>
+                        <a href="#" className="nav-menu-link nav-link ">Eventos</a>
                     </li>
                     <li className="nav-menu-item">
                         <a href="#" className="nav-menu-link nav-link nav-menu-link_active">Tiendas Y Productos</a>
@@ -50,10 +51,10 @@ export default function NavBar(){
                         <button className="nav-icono" aria-label='icono'><FaCircleUser /></button>
                     </li>
                     <li className="nav-menu-item">
-                        <a href="#" className="nav-menu-link nav-link nav-menu-link_active">Crea Tu Cuenta</a>
+                        <a href="/CreateAccount" className="nav-menu-link nav-link nav-menu-link_active">Crea Tu Cuenta</a>
                     </li>
                     <li className="nav-menu-item">
-                        <a href="#" className="nav-menu-link nav-link nav-menu-link_active">Iniciar Sesión</a>
+                        <a href="/Login" className="nav-menu-link nav-link nav-menu-link_active">Iniciar Sesión</a>
                     </li>
                 </ul>
             </nav>

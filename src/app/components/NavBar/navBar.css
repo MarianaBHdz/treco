@@ -51,11 +51,12 @@
 
 .nav-menu-link{
     padding: 8px 12px;
+    border-style: solid;
     border-radius: 20px;
+    border-color: #ECE3CE;
 }
 
-.nav-menu-link:hover,
-.nav-menu-link_active{
+.nav-menu-link:hover{
     background-color: #ECE3CE;
     color: #3A4D39;
     transition: 0.5s;
