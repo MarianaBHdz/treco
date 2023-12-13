@@ -1,0 +1,25 @@
+.container-iniciocard{
+    margin-top: 25px;
+    display: flex;
+    
+}
+
+.iniciocard-img{
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+}
+
+.iniciocard-h1{
+    font-size: 30px;
+    font-family: serif;
+    margin-left: 15px;
+}
+
+.iniciocard-text{
+    margin: 10px 0px 0px 15px;
+    font-family: serif;
+    font-size: 20px;
+    color: #686868;
+    font-weight: normal;
+}
