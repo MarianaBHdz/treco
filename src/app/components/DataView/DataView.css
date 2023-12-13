@@ -1,0 +1,37 @@
+.data-container{
+  width: auto;
+  height: 53px;
+  margin: 10px 10px 10px;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+.data-first-part {
+  float: left;
+  width: 255px;
+  height: 53px;
+  font-family: Inter, Lato, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 29px;
+  color: #474747;
+  align-items: left;
+  justify-content: left;
+}
+
+.data-second-part{
+  float: left;
+  width: auto;
+  height: 53px;
+  font-family: Inter, Lato, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 29px;
+  color: #000000;
+  align-items: left;
+  justify-content: left;
+  
+}

@@ -1,0 +1,11 @@
+.text-dataviews {
+  color: #4f6f52;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 15px;
+  font-weight: 600;
+  height: 26px;
+  letter-spacing: 1px;
+  line-height: 26px;
+  position: fixed;
+  margin-right: 2vh;
+}
