@@ -1,15 +1,21 @@
+'use client';
 import './page.css';
 import { useState, useEffect } from 'react';
 import React from 'react';
 import EventAdmin from '../components/eventAdmin/EventAdmin';
+import { useRouter } from 'next/navigation';
 
 export default function AdminEvents() {
+  const router = useRouter();
   return (
-    <div className='main-container'>
-      <div className='header-container'>
-        <h1 className='H1-Proofile'>ADMINISTRAR EVENTOS</h1>
-      </div>
-      <div className='information-container'>
+    <div className='main-container-aevents'>
+      <div className='header-container-aevents'>
+        <div className='div-H1-aevents'><h1 className='H1-aevents'>ADMINISTRAR EVENTOS</h1></div>
+        <div className='buttons-container-aevents'>
+          <button className='ddbutton-aevents' onClick={() => {router.push('/adminEvents');}}>AGREGAR EVENTO</button>
+        </div>
+      </div> 
+      <div className='information-container-aevents'>
         <EventAdmin
           eventname='Mercado de trueque'
           eventstartdate='18/09/23'

@@ -8,16 +8,19 @@ import { useRouter } from 'next/navigation';
 export default function AdminHome() {
   const router = useRouter();
   return (
-    <div className='main-Container'>
-      <div className='message-container'>
+    <div className='main-Container-ahome'>
+      <div className='message-container-ahome'>
         <img className='iconAdmin' src={iconAdmin.src} alt="Descripción de la imagen" />
-        <p className='main-Text'>
+        <p className='main-Text-ahome'>
           ¡Hola! Bienvenido al perfil del administrador
-          <br />
+          <br /> 
           Aquí podrás administrar los eventos y los cupones de los clientes.
         </p>
       </div>
-      <div className='buttons-container'><button className='ddbutton' onClick={() => {router.push('/adminEvents');}}>Eventos</button></div>
+      <div className='buttons-container-ahome'>
+        <button className='ddbutton-ahome' onClick={() => {router.push('/adminEvents');}}>EVENTOS</button>
+        <button className='ddbutton-ahome' onClick={() => {router.push('/adminCoupons');}}>CUPONES</button>
+      </div>
     </div>
 
   );

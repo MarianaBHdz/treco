@@ -20,28 +20,52 @@ html, body {
   margin-left: 50%;
   margin-top: 25%;
 }  
-.main-container {
+.main-container-aevents {
   height: 894px;
   width: 100%;
   margin: 0 auto;
 }
 
-.header-container{
-  height: 40px;
+.header-container-aevents{
+  height: 60px;
   width: 100%;
   margin: 0 auto;
 }
-.H1-Proofile{
+.H1-aevents{
   color: #4F6F52;
   font-family: Inter, Lato, sans-serif;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 700;
   height: 26px;
   letter-spacing: 3px;
   line-height: 26px;
+  margin-top: 1vh;
 }
-.information-container{
+.div-H1-aevents {
+  float: left;
+}
+
+.information-container-aevents {
   height: 1000px;
   width: 100%;
   margin: 0 auto;
+}
+
+.buttons-container-aevents{
+  position: flex;
+  float: right;
+  width: auto;
+  margin: 0 auto;
+  height: auto;
+}
+
+.ddbutton-aevents {
+  all: unset;
+  border-radius: 5px;
+  padding: 8px 10px;
+  font-size: 18px;
+  background-color: #739072;
+  font-family: Inter, Lato, sans-serif;
+  color: #ECE3CE;
+  margin-top: 1vh; 
 }
