@@ -1,0 +1,27 @@
+.container-ayuda{
+    margin: 5px 10px 20px 20px;
+}
+
+.header-ayuda{
+    color: #4F6F52;
+    font-size: 20px;
+    text-transform: uppercase;
+    line-height: 26px;
+    letter-spacing: 1px;
+}
+
+.header-text-ayuda{
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.lista-ayuda{
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.p-ayuda{
+    font-size: 15px;
+    font-weight: normal;
+    margin-top: 5px;
+}
