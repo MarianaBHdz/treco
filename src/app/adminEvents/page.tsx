@@ -14,7 +14,7 @@ export default function AdminEvents() {
         <div className='buttons-container-aevents'>
           <button className='ddbutton-aevents' onClick={() => {router.push('/adminEvents');}}>AGREGAR EVENTO</button>
         </div>
-      </div>
+      </div> 
       <div className='information-container-aevents'>
         <EventAdmin
           eventname='Mercado de trueque'

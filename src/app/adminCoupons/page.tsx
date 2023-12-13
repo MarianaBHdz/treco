@@ -14,7 +14,7 @@ export default function AdminEvents() {
       </div>
       <div className='buttons-container-acoupons'>
         <button className='ddbutton-acoupons' onClick={() => {router.push('/adminEvents');}}>OTORGAR CUPONES</button>
-        <br/>
+        <br/> 
         <button className='ddbutton-acoupons' onClick={() => {router.push('/adminCoupons');}}>COBRAR CUPONES</button>
       </div>
     </div>
