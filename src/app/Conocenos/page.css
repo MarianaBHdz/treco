@@ -1,0 +1,34 @@
+.container-conocenos{
+    margin: 5px 10px 20px 20px;
+}
+
+.header-conocenos{
+    color: #4F6F52;
+    font-size: 20px;
+    text-transform: uppercase;
+    line-height: 26px;
+    letter-spacing: 1px;
+}
+
+.header-text-conocenos{
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.content-container-conocenos{
+    display: flex;
+}
+
+.img-conocenos{
+    width: 500px;
+    height: 700px;
+    padding-right: 20px;
+}
+
+@media (max-width: 768px){
+    .img-conocenos{
+        width: 100%;
+        height: 500px;
+        padding-right: 20px;
+    }
+}

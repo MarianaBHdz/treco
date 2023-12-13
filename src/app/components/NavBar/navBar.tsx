@@ -42,10 +42,10 @@ export default function NavBar(){
                         <a href="#" className="nav-menu-link nav-link nav-menu-link_active">Tiendas Y Productos</a>
                     </li>
                     <li className="nav-menu-item">
-                        <a href="#" className="nav-menu-link nav-link nav-menu-link_active">Ayuda</a>
+                        <a href="/Ayuda" className="nav-menu-link nav-link nav-menu-link_active">Ayuda</a>
                     </li>
                     <li className="nav-menu-item">
-                        <a href="#" className="nav-menu-link nav-link nav-menu-link_active">Conócenos</a>
+                        <a href="/Conocenos" className="nav-menu-link nav-link nav-menu-link_active">Conócenos</a>
                     </li>
                     <li className="nav-menu-item">
                         <button className="nav-icono" aria-label='icono'><FaCircleUser /></button>

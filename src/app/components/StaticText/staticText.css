@@ -1,0 +1,23 @@
+.container-statictext{
+    margin-top: 10px;
+}
+
+.title-container-statictext{
+    border-radius: 15px;
+    background-color: #ECE3CE;
+    padding: 5px 10px;
+    height: auto;
+    align-items: center;
+}
+
+.title-statictext{
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.text-statictext{
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: normal;
+    text-align: justify;
+}
