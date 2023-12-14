@@ -22,7 +22,7 @@ export default function ClientCoupons() {
 						<div className='icon-div-eventc'><BsFillTicketPerforatedFill className='icon-coupon'/></div>
 					</div>
 					<div className='text-container-ccoupons'>
-						<DataViewS data='19'/> <p className='msg-ccoupons'>CUPONES DISPONIBLES</p>
+						<DataViewS num={1} data='19'/> <p className='msg-ccoupons'>CUPONES DISPONIBLES</p>
 					</div>
 				</div>
 			</div>

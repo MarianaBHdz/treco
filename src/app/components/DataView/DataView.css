@@ -1,37 +1,63 @@
 .data-container{
+  background-color: #ffffff;
+}
+.uno {
   width: auto;
   height: 53px;
   margin: 10px 10px 10px;
-  align-items: center;
-  justify-content: center;
-  background-color: #ffffff;
 }
-
+.dos {
+  width: auto;
+  height: 30px;
+  margin: 10px 10px 10px;
+}
 .data-first-part {
+  font-family: Inter, Lato, sans-serif;
+}
+.unofp {
   float: left;
   width: 255px;
   height: 53px;
-  font-family: Inter, Lato, sans-serif;
   font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
+  font-weight: lighter;
+  font-size: 18px;
   line-height: 29px;
   color: #474747;
+}
+.dosfp {
+  float: left;
+  width: 130px;
+  color: #739072;
+  font-size: 20px;
+  font-weight: lighter;
+  height: 26px;
+  letter-spacing: 0.46px;
+  line-height: 26px;
   align-items: left;
   justify-content: left;
 }
-
 .data-second-part{
+  font-family: Inter, Lato, sans-serif;
+}
+.unosp {
   float: left;
   width: auto;
   height: 53px;
-  font-family: Inter, Lato, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 29px;
   color: #000000;
+}
+.dossp {
+  float: left;
+  width: auto;
+  color: #000000;
+  font-size: 20px;
+  font-weight: 400;
+  height: 26px;
+  letter-spacing: 0.46px;
+  line-height: 26px;
   align-items: left;
   justify-content: left;
-  
 }

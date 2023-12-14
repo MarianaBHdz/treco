@@ -1,0 +1,33 @@
+.main-container-storeview {
+  height: 280px;
+  width: 200px;
+  margin: 2vh;
+}
+.image-container-storeview {
+  background-color: #739072;
+  border-radius: 100px;
+  height: 200px;
+  width: 200px;
+}
+.image-storeview {
+  border-radius: 100px;
+  height: 200px;
+  width: 200px;
+}
+.name-container-storeview {
+  width: 200px;
+  margin-top: 2vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* Alineación de texto al centro */
+}
+.name-storeview {
+  color: #000000;
+  font-family: Inter, Lato, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 0.46px;
+  line-height: 26px;
+  text-align: center;
+}
