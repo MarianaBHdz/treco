@@ -55,5 +55,5 @@ html, body {
   all: unset;
   background-color: #ffffff;
   border-color: #ffffff;
-
+  cursor: pointer;
 }

@@ -36,10 +36,10 @@ export default function NavBar(){
                 <button className="nav-toggle" aria-label='Abrir menú'><FaBars /></button>
                 <ul className="nav-menu">
                     <li className="nav-menu-item">
-                        <a href="#" className="nav-menu-link nav-link ">Eventos</a>
+                        <a href="/clientEvents" className="nav-menu-link nav-link ">Eventos</a>
                     </li>
                     <li className="nav-menu-item">
-                        <a href="#" className="nav-menu-link nav-link nav-menu-link_active">Tiendas Y Productos</a>
+                        <a href="/clientStores" className="nav-menu-link nav-link nav-menu-link_active">Tiendas Y Productos</a>
                     </li>
                     <li className="nav-menu-item">
                         <a href="/Ayuda" className="nav-menu-link nav-link nav-menu-link_active">Ayuda</a>

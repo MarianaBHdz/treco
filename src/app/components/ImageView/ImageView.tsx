@@ -9,7 +9,7 @@ function ImageView (props:ImageView){
   return(
     <div className='main-container-imageview'>
       <div className='image-container-imageview'>
-        <img className = "image-imageview"src={props.dataimage} />
+        <img className = "image-imageview-c"src={props.dataimage} />
       </div>
     </div>
   );

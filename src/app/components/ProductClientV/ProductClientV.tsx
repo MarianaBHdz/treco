@@ -10,12 +10,12 @@ interface ProductClientV{
 
 function ProductClientV (props:ProductClientV){
   return(
-    <div className='main-container-imageview'>
-      <div className='image-container-imageview'>
-        <img className = "image-imageview"src={props.dataimages} />
+    <div className='main-container-product'>
+      <div className='image-container-product'>
+        <img className = "image-product"src={props.dataimages} />
       </div>
-      <div className='name-container-imageview'>
-        <p className='name-imageview'>{props.dataname}</p>
+      <div className='name-container-product'>
+        <p className='name-product'>{props.dataname}</p>
       </div>
     </div>
   );
