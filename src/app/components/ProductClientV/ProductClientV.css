@@ -1,9 +1,10 @@
-.main-container-imageview {
+.main-container-product {
   height: 236px;
   width: 172px;
   margin: 2vh;
 }
-.image-container-imageview {
+.image-container-product {
+  display: flex;
   background-color: #ffffff;
   border-color: #c4c4c4;
   border-left-style: solid;
@@ -15,32 +16,31 @@
   border-top-width: 1px;
   height: 172px;
   overflow: hidden;
-  position: relative;
   width: 172px;
+  justify-content: center;
+  align-items: center;
 }
-.image-imageview {
+.image-product {
   height: 138px;
-  left: 0;
   object-fit: cover;
-  position: fixed;
-  top: 0;
   width: 139px;
 }
-.name-container-imageview {
+.name-container-product {
+  display: flex;
   border: 1px solid;
   border-color: #c4c4c4;
   border-radius: 0px 0px 5px 5px;
   height: 64px;
   width: 172px;
+  align-items: center;
+  justify-content: center;
 }
-.name-imageview {
+.name-product {
   color: #000000;
   font-family: Inter, Lato, sans-serif;
   font-size: 15px;
   font-weight: 400;
   height: 26px;
-  left: 0;
   letter-spacing: 0.46px;
   line-height: 26px;
-  position: fixed;
 }
