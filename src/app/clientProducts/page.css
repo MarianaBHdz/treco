@@ -1,0 +1,41 @@
+*{
+  margin: 0;
+  padding: 0;    
+}
+html, body {
+  font-size: 20px;
+  background-color: #ffffff;
+  font-family: Inter, Lato, sans-serif;
+  overflow-y: hidden;
+}
+.cargando-Proofile {
+  font-family: Inter, Lato, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 29px;
+  align-items: center;
+  align-content: center;
+  margin-left: 50%;
+  margin-top: 25%;
+}
+.main-container-cproducts {
+  height: 894px;
+  width: 100%;
+  margin: 0 auto;
+}
+.store-container-cproducts {
+  display: flex;
+  height: auto;
+  width: 100%;
+  margin: 0 auto;
+}
+.image-container-store {
+  float: left;
+}
+.infostore-container-cproducts {
+  float: right;
+  width: auto;
+  height: auto;
+  margin-left: 4vh;
+}

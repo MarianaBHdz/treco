@@ -1,0 +1,17 @@
+.main-container-imageview {
+  height: 150px;
+  width: 150px;
+  margin: 2vh;
+}
+.image-container-imageview {
+  background-color: #739072;
+  border-radius: 100px;
+  height: 150px;
+  width: 150px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.image-imageview {
+  border-radius: 100px;
+  height: 150px;
+  width: 150px;
+}

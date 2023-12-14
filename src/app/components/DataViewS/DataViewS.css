@@ -1,6 +1,9 @@
 .text-dataviews {
+  font-family: Inter, Lato, sans-serif;
+}
+
+.uno {
   color: #4f6f52;
-  font-family: "Inter-SemiBold", Helvetica;
   font-size: 15px;
   font-weight: 600;
   height: 26px;
@@ -9,3 +12,15 @@
   position: fixed;
   margin-right: 2vh;
 }
+
+.dos {
+  color: #3a4d39;
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  height: 26px;
+  letter-spacing: 0.46px;
+  line-height: 26px;
+  display: inline-block;
+}
+

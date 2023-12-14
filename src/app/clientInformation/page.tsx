@@ -14,10 +14,10 @@ export default function ClientInformation() {
         <p className='description-Profile'>Administra tu cuenta</p>
       </div>
       <div className='information-container-cinformation'>
-        <DataView dataname='Nombre y apellido' datainformation='Fulanito Hernández' />
-        <DataView dataname='Correo electrónico' datainformation='fulanito@gmail.com' />
-        <DataView dataname='Fecha de nacimiento' datainformation='02/04/1990'/>
-        <DataView dataname='CURP' datainformation='JSOV900402HLDHCOS4'/>
+        <DataView datanum={1} dataname='Nombre y apellido' datainformation='Fulanito Hernández' />
+        <DataView datanum={1} dataname='Correo electrónico' datainformation='fulanito@gmail.com' />
+        <DataView datanum={1} dataname='Fecha de nacimiento' datainformation='02/04/1990'/>
+        <DataView datanum={1} dataname='CURP' datainformation='JSOV900402HLDHCOS4'/>
       </div>
       <div className='buttons-container-cinformation'>
         <button className='ddbutton-cinformation' onClick={() => {router.push('/adminEvents');}}>MODIFICAR</button>
