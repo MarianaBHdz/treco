@@ -1,0 +1,89 @@
+.container-mitienda{
+    margin-bottom: 20px;
+    width: 100%;
+    height: auto;
+}
+
+.header-container-mitienda{
+    height: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-mitienda{
+    text-transform: uppercase;
+    color: #4F6F52;
+    font-family: Inter, Lato, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    height: 26px;
+    letter-spacing: 3px;
+    line-height: 26px;
+    margin-top: 1vh;
+}
+
+.text-mitienda{
+    font-family: Inter, Lato, sans-serif;
+    font-style: normal;
+    font-weight: lighter;
+    font-size: 16px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    color: #898686;
+}
+
+.data-container-mitienda{
+    margin-top: 10px;
+    width: 100%;
+    height: auto;
+}
+
+.container-img-mitienda{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.img-mitienda{
+    height: 200px;
+    width: 200px;
+    border-radius: 100%;
+}
+
+.dataview-container-mitienda{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-main-container-mitienda{
+    width: 100%;
+    height: auto;
+}
+
+.button-container-mitienda{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    padding-right: 110px;
+}
+
+.button-mitienda{
+    all: unset;
+    border-radius: 5px;
+    padding: 8px 10px;
+    font-size: 18px;
+    background-color: #739072;
+    font-family: Inter, Lato, sans-serif;
+    color: #ECE3CE; 
+    margin-left: 10vh;
+}
