@@ -1,0 +1,72 @@
+*{
+  margin: 0;
+  padding: 0;    
+}
+html, body {
+font-size: 20px;
+background-color: #ffffff;
+font-family: Inter, Lato, sans-serif;
+overflow-y: hidden;
+}
+.cargando-Proofile {
+  font-family: Inter, Lato, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 29px;
+  align-items: center;
+  align-content: center;
+  margin-left: 50%;
+  margin-top: 25%;
+}
+.main-container-cinformation {
+  height: 894px;
+  width: 100%;
+  margin: 0 auto;
+}
+.header-container-cinformation {
+  height: 60px;
+  width: 100%;
+  margin: 0 auto;
+}
+.H1-ccoupons {
+  color: #4F6F52;
+  font-family: Inter, Lato, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  height: 26px;
+  letter-spacing: 3px;
+  line-height: 26px;
+  margin-top: 1vh;
+}
+.description-Profile{
+  font-family: Inter, Lato, sans-serif;
+  font-style: normal;
+  font-weight: lighter;
+  font-size: 16px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #898686;
+}
+.information-container-cinformation {
+  height: auto;
+  width: 100%;
+  margin-left: 5vh;
+}
+.buttons-container-cinformation {
+  position: flex;
+  width: 100%;
+  margin: 0 auto;
+  height: auto;
+}
+.ddbutton-cinformation {
+  all: unset;
+  border-radius: 5px;
+  padding: 8px 10px;
+  font-size: 18px;
+  background-color: #739072;
+  font-family: Inter, Lato, sans-serif;
+  color: #ECE3CE; 
+  margin-left: 10vh;
+}
