@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import './DataView.css';
 import React, { PropsWithoutRef } from 'react';
 interface DataView{
