@@ -17,6 +17,10 @@ export async function GET(req: Request) {
         date_of_birth: true,
         CURP: true,
         avatar_url: true,
+        material: true,
+        numCoupons: true,
+        quantityM: true,
+        unitM: true,
         u_coupons: true,
         stores: true,
       },
@@ -41,7 +45,7 @@ export async function POST(req: Request) {
   const reqData= await req.json();
   const {user} = reqData;
   const {id, user_metadata, email} = user;
-  const {full_name, avatar_url, CURP} = user_metadata;
+  const {full_name, avatar_url, CURP, material, numCoupons, quantityM, unitM} = user_metadata;
 
   try {
     const user = await prisma.user.upsert({
@@ -58,6 +62,10 @@ export async function POST(req: Request) {
         role: 'CONSUMER', 
         avatar_url,
         CURP,
+        material,
+        numCoupons,
+        quantityM,
+        unitM,
       }
     })
 

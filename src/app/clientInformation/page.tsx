@@ -6,12 +6,23 @@ import { useRouter } from 'next/navigation';
 import DataView from '../components/DataView/DataView';
 import axios from 'axios';
 import { useSupabase } from '../supabase-provider';
+import Formperfil from '../components/FormCInformation/FormCInformation';
+import RWDModal from '../components/ModalPopup/RWDModal';
+import ModifyUser from '../components/buttons/ModifyUser';
+
+
 
 export default function ClientInformation() {
   const router = useRouter();
 
   const { session } = useSupabase();
   const [user, setUser] = useState<any>();
+
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const toggleModal = () => {
+    setIsModalVisible(wasModalVisible => !wasModalVisible)
+  }
+
 
   useEffect(() => {
     //const userId = session?.user?.id;
@@ -38,9 +49,9 @@ export default function ClientInformation() {
         <DataView datanum={1} dataname='Correo electrónico' datainformation={user?.email} />
         <DataView datanum={1} dataname='Fecha de nacimiento' datainformation={date}/>
         <DataView datanum={1} dataname='CURP' datainformation={user?.CURP}/>
-      </div>
-      <div className='buttons-container-cinformation'>
-        <button className='ddbutton-cinformation' onClick={() => {router.push('/adminEvents');}}>MODIFICAR</button>
+        <RWDModal header="Modificar Perfil"onBackdropClick={toggleModal} isModalVisible={isModalVisible} message="* Campos obligatorios" content={<Formperfil userS={user} onAccept={toggleModal} userID={'FFWEE344F4S'}/>}/>
+        <ModifyUser text='Modificar' onClick={toggleModal}/>
+        <div id = "modal-root"></div>
       </div>
 
     </div>

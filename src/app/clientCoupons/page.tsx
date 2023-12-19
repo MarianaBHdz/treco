@@ -5,9 +5,29 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { BsFillTicketPerforatedFill } from "react-icons/bs";
 import DataViewS from '../components/DataViewS/DataViewS';
+import { useSupabase } from '../supabase-provider';
+import axios from 'axios';
+
+
 
 export default function ClientCoupons() {
   const router = useRouter();
+
+  const { session } = useSupabase();
+  const [user, setUser] = useState<any>();
+
+  useEffect(() => {
+    //const userId = session?.user?.id;
+    axios.get('/api/User?user_id=FFWEE344F4S')
+      .then((response: any) => {
+        console.log(response.data.user);
+        setUser(response.data.user);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  }, [session]);
+
   return (
     <div className='main-container-ccoupons'>
       <div className='header-container-ccoupons'>
@@ -22,7 +42,7 @@ export default function ClientCoupons() {
 						<div className='icon-div-eventc'><BsFillTicketPerforatedFill className='icon-coupon'/></div>
 					</div>
 					<div className='text-container-ccoupons'>
-						<DataViewS num={1} data='19'/> <p className='msg-ccoupons'>CUPONES DISPONIBLES</p>
+						<DataViewS num={1} data={user?.numCoupons}/> <p className='msg-ccoupons'>CUPONES DISPONIBLES</p>
 					</div>
 				</div>
 			</div>
