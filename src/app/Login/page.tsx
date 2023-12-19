@@ -6,7 +6,7 @@ export default function Login(){
     return( 
         <div>
             <GoogleOAuthProvider clientId="830931273104-5185tsrliv9ikog1tq7a1q4cb2dagv4i.apps.googleusercontent.com">
-                <LoginCard titulo="Iniciar sesión" subtitulo="Inicia sesión en cuestión de segundos"/>
+                <LoginCard titulo="Iniciar sesión" subtitulo="Inicia sesión en cuestión de segundos" accountstatus={false}/>
             </GoogleOAuthProvider>
         </div>
     )

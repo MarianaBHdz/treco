@@ -4,6 +4,7 @@ import './navBar.css'
 import { FaBars } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
 import{useEffect} from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function NavBar(){
     useEffect(() => {
@@ -27,11 +28,13 @@ export default function NavBar(){
         
     }, []);
 
+    const router= useRouter();
+    
     return(
         <header className="header">
             <nav className="navbar">
                 <div className="logo">
-                    <img src="/logo.png" alt="Logo TRECO" className='logo-img'/>
+                    <img src="/logo.png" alt="Logo TRECO" onClick={() => {router.push('/Inicio');}} className='logo-img'/>
                 </div>
                 <button className="nav-toggle" aria-label='Abrir menú'><FaBars /></button>
                 <ul className="nav-menu">
@@ -48,7 +51,7 @@ export default function NavBar(){
                         <a href="#" className="nav-menu-link nav-link nav-menu-link_active">Conócenos</a>
                     </li>
                     <li className="nav-menu-item">
-                        <button className="nav-icono" aria-label='icono'><FaCircleUser /></button>
+                        <button className="nav-icono" onClick={() => {router.push('/Login');}} aria-label='icono'><FaCircleUser /></button>
                     </li>
                     <li className="nav-menu-item">
                         <a href="/CreateAccount" className="nav-menu-link nav-link nav-menu-link_active">Crea Tu Cuenta</a>

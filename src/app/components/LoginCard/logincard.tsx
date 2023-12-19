@@ -2,20 +2,36 @@
 
 import './logincard.css';
 import React from 'react';
-import { GoogleLogin } from '@react-oauth/google';
 import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 
 export interface LoginCardProps {
     titulo:string;
     subtitulo:string;
+    accountstatus: boolean;
 }
 
-  export const LoginCard: React.FC<LoginCardProps> = ({titulo,subtitulo }) => {
-    const login = useGoogleLogin({
-        onSuccess: tokenResponse => console.log(tokenResponse),
-      });
+export const LoginCard: React.FC<LoginCardProps> = ({titulo,subtitulo,accountstatus}) => {
+  const login = useGoogleLogin({
+    onSuccess: async (response) => {
+      try{
+        const userInfo= await axios.get(
+        "https://www.googleapis.com/oauth2/v3/userinfo",
+        {
+          headers:{
+            Authorization: `Bearer ${response.access_token}`,
+          },
+        }
+        );
+        console.log(userInfo);
+      }catch (err){
+        console.log(err);
+      }
+    }
+  });
+      
     
-    return(
+  return(
     <div className="login-container">
         <div className="login-card">
             <h1 className="login-card-h1">{titulo}</h1>
@@ -27,4 +43,4 @@ export interface LoginCardProps {
         </div>
     </div>
     )
-  };
+};
