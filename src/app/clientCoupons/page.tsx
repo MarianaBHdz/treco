@@ -7,6 +7,9 @@ import { BsFillTicketPerforatedFill } from "react-icons/bs";
 import DataViewS from '../components/DataViewS/DataViewS';
 import { useSupabase } from '../supabase-provider';
 import axios from 'axios';
+import FormCCoupons from '../components/FormCCoupons/FormCCoupons';
+import RWDModal from '../components/ModalPopup/RWDModal';
+import ModifyUser from '../components/buttons/ModifyUser';
 
 
 
@@ -15,6 +18,11 @@ export default function ClientCoupons() {
 
   const { session } = useSupabase();
   const [user, setUser] = useState<any>();
+
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const toggleModal = () => {
+    setIsModalVisible(wasModalVisible => !wasModalVisible)
+  }
 
   useEffect(() => {
     //const userId = session?.user?.id;
@@ -33,7 +41,9 @@ export default function ClientCoupons() {
       <div className='header-container-ccoupons'>
 				<div className='div-H1-ccoupons'><h1 className='H1-ccoupons'>MIS CUPONES</h1></div>
 				<div className='buttons-container-ccoupons'>
-          <button className='ddbutton-ccoupons' onClick={() => {router.push('/adminEvents');}}>CALCULAR CUPONES</button>
+          <RWDModal header="Modificar Perfil"onBackdropClick={toggleModal} isModalVisible={isModalVisible} message="* Campos obligatorios" content={<FormCCoupons userS={user} onAccept={toggleModal} userID={'FFWEE344F4S'}/>}/>
+          <ModifyUser text='CALCULAR CUPONES' onClick={toggleModal}/>
+          <div id = "modal-root"></div>
         </div>
       </div>
 			<div className='content-container-ccoupons'>

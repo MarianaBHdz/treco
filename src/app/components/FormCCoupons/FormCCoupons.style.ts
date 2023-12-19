@@ -9,9 +9,12 @@ export const SForm = styled(Form)`
   justify-items: center;
 `;
 export const SField = styled(Field)`
-  justify-content: right;
-  align-items: right;
-  height: 45%;
+  height: 15%;
+  font-size: 17px;
+  margin-bottom: 40px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 `;
 export const SFieldName = styled(Field)`
   width: 160%;
@@ -59,6 +62,7 @@ export const Slabel = styled.label`
   margin-bottom: 40px;
   display: inline-block;
   margin-left: 0px;  
+  width: 30vh;
 `;
 
 export const SAsterisk = styled.span`
@@ -92,7 +96,7 @@ export const Sbutton = styled.button`
   }
 
   display: inline-block;
-  margin-left: auto;
+  margin-left: 30vh;
   margin-right: 10px;
   width: 20%;
 `;
@@ -120,20 +124,25 @@ export const Cbutton = styled.div`
   width: 20%;
 `;  
 export const DivSend = styled.div`
-  display: flex;
   justify-content: center;
-  align-items: center;
   margin-top: 5%;
+  flex-direction: column;  // Alinear los botones en una columna
+  align-items: center;
 `;
-
+export const Cdiv= styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 118vh;
+`;
 export const Ddiv = styled.div`
   display: flex;
+  flex-direction: column;
   font-size: 18px;
   justify-content: left;
   align-items: left;
   margin-left: 15%;
+  height: auto;
 `;
-
 export const Udiv = styled.div`
   justify-content: left;
   align-items: left;
@@ -179,18 +188,11 @@ export const Ibutton = styled.div`
   margin-right: auto;
   width: 80%;
 `;
-export const Cdiv= styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: -40px;
-`;
 export const DdivLarge = styled(Ddiv)`
   flex: 2;
 `;
 export const DivAdj= styled.div`
   display: flex;
   margin: 2px;
-  
   position: relative;
 `;

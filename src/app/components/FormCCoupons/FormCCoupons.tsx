@@ -10,7 +10,6 @@ import axios from 'axios';
 
 export interface User {
   material: string;
-  numCoupons: number;
   quantityM: string;
   unitM: number;
 }
@@ -34,19 +33,21 @@ const validationSchema = Yup.object().shape({
     .required('Este campo es requerido'),
 });
 const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => { 
-  const material =[
-    { value: 1, label: 'Juguetes' },
-    { value: 2, label: 'Electrónicos' },
-    { value: 3, label: 'Cocina' },
-    { value: 4, label: 'Muebles' },
-    { value: 5, label: 'Hogar' },
-    { value: 6, label: 'Zapatos' },
-    { value: 8, label: 'Belleza' },
-    { value: 7, label: 'Otra' },
-    
+  const materialM =[
+    { value: 1, label: 'Alumino' },
+    { value: 2, label: 'Botellas de vidrio' },
+    { value: 3, label: 'Latas de fierro' },
+    { value: 4, label: 'HDPE' },
+    { value: 5, label: 'PET' },
+    { value: 6, label: 'Papel' },
+    { value: 7, label: 'Carton' },
+    { value: 8, label: 'Tetrapack' },
+    { value: 9, label: 'Aceite de cocina' },
+    { value: 10, label: 'Residuos electronicos' },
+    { value: 11, label: 'Residuos electricos' },
   ];
 
-  const unitM =[
+  const unitMM =[
     { value: 1, label: 'piezas' },
     { value: 2, label: 'kilogramos' },    
   ];
@@ -92,52 +93,62 @@ const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => {
         <SForm>
           <Cdiv>
             <Ddiv>
-                <Slabel htmlFor="material_id">Selecciona un material<SAsterisk>*</SAsterisk></Slabel>
+                <Slabel htmlFor="material">Selecciona un material<SAsterisk>*</SAsterisk></Slabel>
                 <DivAdj></DivAdj>
                 <DivAdj></DivAdj>
-                <Slabel htmlFor="quantity">Cantidad<SAsterisk>*</SAsterisk></Slabel>
+                <Slabel htmlFor="quantityM">Cantidad<SAsterisk>*</SAsterisk></Slabel>
                 <DivAdj></DivAdj>
-                <Slabel htmlFor="unit_id">Selecciona la unidad<SAsterisk>*</SAsterisk></Slabel>
+                <Slabel htmlFor="unitM">Selecciona la unidad<SAsterisk>*</SAsterisk></Slabel>
                 <DivAdj></DivAdj>
                 <DivAdj></DivAdj>
             </Ddiv>
 
-          <Ddiv>
-            <SField
-              as="select"
-              id="unit_id"
-              name="unit_id"
-              onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-                const newValue = parseInt(event.target.value, 10); // Convert value to number
-                setFieldValue('unit_id', newValue);
-              }}
-            >
-              <option value="">--Selecciona--</option>
-              {unitM.map(unit_id => (
-                <option key={unit_id.value} value={unit_id.value}>
-                  {unit_id.label}
-                </option>
-              ))}
-            </SField>
-            <SErrorMessage name="unit_id" component="div" />
+            <Ddiv>
+              <SField
+                as="select"
+                id="material"
+                name="material"
+                onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                  const newValue = parseInt(event.target.value, 10); // Convert value to number
+                  setFieldValue('material', newValue);
+                }}
+              >
+                <option value="">--Selecciona--</option>
+                {materialM.map(material => (
+                  <option key={material.value} value={material.value}>
+                    {material.label}
+                  </option>
+                ))}
+              </SField>
+              <SErrorMessage name="material" component="div" />
 
-            <SField type="string" id="quantityM" name="quantityM" />
-            <SErrorMessage name="quantityM" component="div" />
-        
-            
-          </Ddiv>
-         
-          
+              <SField type="string" id="quantityM" name="quantityM" />
+              <SErrorMessage name="quantityM" component="div" />
 
-        
-            
-          <DivSend>
-          <Sbutton type="submit">ACEPTAR</Sbutton>
-            <Cbutton onClick={handleCancel}>CANCELAR</Cbutton>
-            
-            
-          </DivSend>
+              <SField
+                as="select"
+                id="unitM"
+                name="unitM"
+                onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                  const newValue = parseInt(event.target.value, 10); // Convert value to number
+                  setFieldValue('unitM', newValue);
+                }}
+              >
+                <option value="">--Selecciona--</option>
+                {unitMM.map(unitM => (
+                  <option key={unitM.value} value={unitM.value}>
+                    {unitM.label}
+                  </option>
+                ))}
+              </SField>
+              <SErrorMessage name="unitM" component="div" />
+            </Ddiv>
           </Cdiv>
+            
+            <DivSend>
+              <Sbutton type="submit">ACEPTAR</Sbutton>
+              <Cbutton onClick={handleCancel}>CANCELAR</Cbutton>
+            </DivSend>
         </SForm>
         
         {isSuccessModalOpen && <SuccessPerfil onClose={() => {setIsSuccessModalOpen(false);onAccept();window.location.reload();}} />}
