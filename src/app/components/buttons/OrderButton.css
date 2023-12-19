@@ -1,0 +1,74 @@
+.OrderButton {
+  width:fit-content;
+	height: 36px;
+  box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	gap: 10px;
+	background: #ffffff;
+	border: 3px solid #FC9052;
+	border-radius: 20px;
+	letter-spacing: 0.46px;
+	text-transform: uppercase;
+
+	font-family: Inter, Lato, sans-serif;
+	font-style:normal;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 26px;
+	color: #000000;
+  margin-right: 2%;
+}
+
+.OrderButton:hover {
+  width:fit-content;
+	height: 36px;
+  box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	gap: 10px;
+	background: #FC9052;
+	border: 3px solid #FC9052;
+	border-radius: 20px;
+	letter-spacing: 0.46px;
+	text-transform: uppercase;
+
+	font-family: Inter, Lato, sans-serif;
+	font-style:normal;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 26px;
+	color: #ffffff;
+  margin-right: 2%;
+}
+
+.OrderButton.selected {
+  width:fit-content;
+	height: 36px;
+  box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	gap: 10px;
+	background: #FC9052;
+	border: 3px solid #FC9052;
+	border-radius: 20px;
+	letter-spacing: 0.46px;
+	text-transform: uppercase;
+
+	font-family: Inter, Lato, sans-serif;
+	font-style:normal;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 26px;
+	color: #ffffff;
+  margin-right: 2%;
+}

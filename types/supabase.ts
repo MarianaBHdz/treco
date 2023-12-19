@@ -50,6 +50,10 @@ export interface Database {
           date_of_birth: string
           CURP: string
           email: string
+          material: string
+          numCoupons: number
+          quantityM: string
+          unitM: number
           id: string
           name: string
           refresh_token: string
@@ -63,6 +67,10 @@ export interface Database {
           date_of_birth: string
           CURP: string
           email: string
+          material: string
+          numCoupons: number
+          quantityM: string
+          unitM: number
           id?: number
           name: string
           refresh_token: string
@@ -76,6 +84,10 @@ export interface Database {
           date_of_birth?: string
           CURP?: string
           email?: string
+          material?: string
+          numCoupons?: number
+          quantityM?: string
+          unitM?: number
           id?: number
           name?: string
           refresh_token?: string
