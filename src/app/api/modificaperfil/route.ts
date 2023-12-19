@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
+import {prisma} from '@/app/db';
 
-import {prisma} from '@/app/db'
 export async function PUT(req: Request) {
   const url = new URL(req.url);
   const reqData= await req.json();
@@ -22,7 +22,7 @@ export async function PUT(req: Request) {
             quantityM: reqData.quantityM,
             unitM: reqData.unitM,
           }
-      });
+    });
 
 
     console.log('Modified:', updateUser);
