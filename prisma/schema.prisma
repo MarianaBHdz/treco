@@ -19,10 +19,10 @@ model User {
   CURP            String        @db.VarChar(25)
   avatar_url      String?       @db.VarChar(255)
   created_at      DateTime      @default(now())
-  material        String        @db.VarChar(255)
+  material        Int           @db.Integer
   numCoupons      Int           @db.Integer
   quantityM       String        @db.VarChar(50)
-  unitM            Int           @db.Integer
+  unitM           Int           @db.Integer
   u_coupons       Coupon[]
   stores          Store[]
 }

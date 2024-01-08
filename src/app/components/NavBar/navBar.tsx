@@ -4,8 +4,10 @@ import './navBar.css'
 import { FaBars } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
 import{useEffect} from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function NavBar(){
+    const router = useRouter();
     useEffect(() => {
         const handleClick = () => {
           const navMenu = document.querySelector('.nav-menu');
@@ -31,7 +33,7 @@ export default function NavBar(){
         <header className="header">
             <nav className="navbar">
                 <div className="logo">
-                    <img src="/logo.png" alt="Logo TRECO" className='logo-img'/>
+                    <img src="/logo.png" onClick={() => {router.push('/Inicio');}} alt="Logo TRECO" className='logo-img'/>
                 </div>
                 <button className="nav-toggle" aria-label='Abrir menú'><FaBars /></button>
                 <ul className="nav-menu">
