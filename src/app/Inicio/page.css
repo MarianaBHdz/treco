@@ -1,3 +1,8 @@
+.div-maincontainer-inicio{
+    width: 100%;
+    height: auto;
+}
+
 .div-container-inicio{
     width: 100%;
     justify-content: center;
@@ -18,4 +23,47 @@
 .inicio-img{
     height: 250px;
     width: auto;
+}
+
+/*Admin*/
+.div-container-admin-inicio{
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    display: inline-block;
+    flex-direction: row;
+}
+
+.div-inicio-img-admin{
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+}
+
+.inicio-img-admin{
+    height: 200px;
+    width: auto;
+}
+
+.inicio-div-p{
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.p-inicio-admin{
+    color: #3A4D39;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 30px;
+    letter-spacing: 3px;
+    word-wrap: break-word
+}
+
+@media (max-width: 768px){
+    .div-maincontainer-inicio{
+        margin-bottom: 10px;
+    }
 }

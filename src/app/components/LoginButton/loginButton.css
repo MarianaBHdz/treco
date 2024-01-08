@@ -1,0 +1,25 @@
+.login-button-container{
+    margin-top: 40px;
+    width: auto;
+    height: auto;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.login-button-div{
+    width: 400px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #000000;
+    border-radius: 15px;
+    padding: 5px 10px;
+}
+
+.login-button-img{
+    width: auto;
+    height: 30px;
+    margin-right: 10px;
+}

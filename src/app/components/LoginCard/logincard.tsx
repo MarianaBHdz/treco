@@ -2,20 +2,60 @@
 
 import './logincard.css';
 import React from 'react';
-import { GoogleLogin } from '@react-oauth/google';
-import { useGoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin, googleLogout } from '@react-oauth/google';
+import axios from 'axios';
+import { useSession } from '../context/SessionContext';
 
 export interface LoginCardProps {
     titulo:string;
     subtitulo:string;
 }
 
-  export const LoginCard: React.FC<LoginCardProps> = ({titulo,subtitulo }) => {
-    const login = useGoogleLogin({
-        onSuccess: tokenResponse => console.log(tokenResponse),
-      });
+export const LoginCard: React.FC<LoginCardProps> = ({titulo,subtitulo}) => {
+  const { sessionId, setSessionId } = useSession();
+  
+  const login = useGoogleLogin({
+    onSuccess: async (response) => {
+      try{
+        const userInfo= await axios.get(
+        "https://www.googleapis.com/oauth2/v3/userinfo",
+        {
+          headers:{
+            Authorization: `Bearer ${response.access_token}`,
+          },
+        }
+      );
+      
+      const user = {
+        id: userInfo.data.sub|| '', 
+        user_metadata: {
+          full_name: userInfo.data.name, 
+          avatar_url: userInfo.data.picture,
+          CURP: '',
+          material: "",
+          numCoupons: 0,
+          quantityM: "",
+          unitM: 0,
+        },
+        email: userInfo.data.email,
+      };
+      
+      await axios.post(`/api/User?user_id=${userInfo.data.sub}`, {user} );
+
+      setSessionId(userInfo.data.sub);
+      console.log("ID de sesión: ", sessionId)
+      }catch (err){
+        console.log(err);
+      }
+    }
+  });
+
+  const logout = () =>{
+    googleLogout();
+    setSessionId(null);
+  }
     
-    return(
+  return(
     <div className="login-container">
         <div className="login-card">
             <h1 className="login-card-h1">{titulo}</h1>
@@ -27,4 +67,4 @@ export interface LoginCardProps {
         </div>
     </div>
     )
-  };
+};
