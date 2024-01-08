@@ -43,10 +43,7 @@ overflow-y: hidden;
   float: left;
 }
 .buttons-container-ccoupons {
-  position: flex;
-  float: right;
   width: auto;
-  margin: 0 auto;
   height: auto;
 }
 .ddbutton-ccoupons {
@@ -61,10 +58,11 @@ overflow-y: hidden;
 } 
 .content-container-ccoupons {
   display: flex;
-  height: 894px;
+  height: 150px;
   width: 100%;
   margin: 0 auto;
-  align-content: center;
+  justify-content: space-between;
+  align-items: center;
 }
 .coupons-container-ccoupons {
   display: flex;

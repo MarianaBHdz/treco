@@ -1,5 +1,4 @@
 import { Formik, Field, ErrorMessage,FieldProps} from 'formik';
-import "react-datepicker/dist/react-datepicker.css";
 import { useState } from 'react';
 import React from 'react';
 import * as Yup from 'yup';
@@ -9,9 +8,14 @@ import CancelConfirmation from '../confirmations/CancelConfirmation';
 import axios from 'axios';
 
 export interface User {
-  material: string;
+  name: string;
+  email: string;
+  date_of_birth?: string;
+  CURP: string;
+  material: number;
   quantityM: string;
   unitM: number;
+  numCoupons: number;
 }
 
 export interface UserSend {
@@ -24,9 +28,9 @@ const quantityMRegExp = /^[0-9]{1,3}[.][0-9]{1,3}$/;
 
 
 const validationSchema = Yup.object().shape({
-  material: Yup.number()
+  material: Yup.string()
     .required('Este campo es requerido'),
-  quantityM: Yup.number()
+  quantityM: Yup.string()
     .min(1, 'La cantidad debe ser un número positivo')
     .required('Este campo es requerido'),
   unitM: Yup.number()
@@ -34,7 +38,7 @@ const validationSchema = Yup.object().shape({
 });
 const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => { 
   const materialM =[
-    { value: 1, label: 'Alumino' },
+    { value: 1, label: 'Aluminio' },
     { value: 2, label: 'Botellas de vidrio' },
     { value: 3, label: 'Latas de fierro' },
     { value: 4, label: 'HDPE' },
@@ -53,8 +57,11 @@ const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => {
   ];
 
   const initialValues = {
+    nombreApellido: userS.name,
+    fechaNacimiento: userS.date_of_birth,
+    CURP: userS.CURP,
     material: 0,
-    quantityM: 0,
+    quantityM: '',
     unitM: 0,
   };
   const [isSuccessModalOpen, setIsSuccessModalOpen] = React.useState(false);
@@ -64,12 +71,11 @@ const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => {
       const JSONval=JSON.stringify(values)
       console.log(JSONval)
       console.log(UserIDS)
-      const response =await axios.put('/api/modificarperfil?user_id='+UserIDS,JSONval)
+      const response =await axios.put('/api/modificaperfil?user_id='+UserIDS,JSONval)
       console.log(response)
       setIsSuccessModalOpen(true);
     } catch (error) {
       console.error(error);
-      setIsSuccessModalOpen(true);
       // Manejo de errores
     }
   };
@@ -83,9 +89,40 @@ const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={values =>{
-        handleSubmit(userID,values)
-        console.log(values)
-       }}
+        //handleSubmit(userID,values)
+        //console.log('Estos son los que se envian',values)
+
+        // Obtenemos los valores del formulario
+        const { unitM, quantityM, material } = values;
+
+        // Calculamos el valor de numCoupons en base a los valores del formulario
+        let calculatedNumCoupons = 0;
+
+        if (unitM == 1) {
+          // Si ambos unitM y quantityM tienen valores
+          calculatedNumCoupons = unitM * parseFloat(quantityM);
+
+          // Dependiendo del valor de material, hacemos otra multiplicación
+          if (material === 1) {
+            // Si el material es 1 (Aluminio)
+            calculatedNumCoupons *= 2;
+          } else if (material === 2) {
+            // Si el material es 2 (Botellas de vidrio)
+            calculatedNumCoupons *= 3;
+          }
+          // Puedes agregar más condiciones para otros materiales según sea necesario
+        }else{
+          
+        }
+
+        // Asignamos el valor calculado a numCoupons en los valores del formulario
+        const updatedValues = { ...values, numCoupons: calculatedNumCoupons };
+
+        // Llamamos a la función handleSubmit con los valores actualizados
+        handleSubmit(userID, updatedValues);
+
+        console.log('Estos son los que se envian', updatedValues);
+      }}
       enableReinitialize={true}
     >
       {({ setFieldValue }) => (
@@ -122,7 +159,7 @@ const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => {
               </SField>
               <SErrorMessage name="material" component="div" />
 
-              <SField type="string" id="quantityM" name="quantityM" />
+              <SField type="text" id="quantityM" name="quantityM" />
               <SErrorMessage name="quantityM" component="div" />
 
               <SField
@@ -154,11 +191,11 @@ const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => {
         {isSuccessModalOpen && <SuccessPerfil onClose={() => {setIsSuccessModalOpen(false);onAccept();window.location.reload();}} />}
         {isCancelConfirmationOpen && (
         <CancelConfirmation
-      onClose={() => setIsCancelConfirmationOpen(false)}
-      onAccept={() => {
-        setIsCancelConfirmationOpen(false);
-        onAccept();
-      }}
+        onClose={() => setIsCancelConfirmationOpen(false)}
+        onAccept={() => {
+          setIsCancelConfirmationOpen(false);
+          onAccept();
+        }}
     />)}
         </>
       )}
