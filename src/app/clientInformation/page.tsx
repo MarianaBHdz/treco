@@ -9,12 +9,14 @@ import { useSupabase } from '../supabase-provider';
 import Formperfil from '../components/FormCInformation/FormCInformation';
 import RWDModal from '../components/ModalPopup/RWDModal';
 import ModifyUser from '../components/buttons/ModifyUser';
-
+import { useSession } from '../components/context/SessionContext';
 
 
 export default function ClientInformation() {
   const router = useRouter();
-
+  const { sessionId } = useSession();
+  console.log('Id del usario');
+console.log(sessionId);
   const { session } = useSupabase();
   const [user, setUser] = useState<any>();
 
@@ -26,7 +28,7 @@ export default function ClientInformation() {
 
   useEffect(() => {
     //const userId = session?.user?.id;
-    axios.get('/api/User?user_id=FFWEE344F4S')
+    axios.get('/api/User?user_id='+sessionId)
       .then((response: any) => {
         console.log(response.data.user);
         setUser(response.data.user);

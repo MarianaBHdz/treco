@@ -5,6 +5,7 @@ import React from 'react';
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 import axios from 'axios';
 import { useSession } from '../context/SessionContext';
+import { useRouter } from 'next/navigation';
 
 export interface LoginCardProps {
     titulo:string;
@@ -13,6 +14,7 @@ export interface LoginCardProps {
 
 export const LoginCard: React.FC<LoginCardProps> = ({titulo,subtitulo}) => {
   const { sessionId, setSessionId } = useSession();
+  const router = useRouter();
   
   const login = useGoogleLogin({
     onSuccess: async (response) => {
@@ -32,7 +34,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({titulo,subtitulo}) => {
           full_name: userInfo.data.name, 
           avatar_url: userInfo.data.picture,
           CURP: '',
-          material: "",
+          material: 0,
           numCoupons: 0,
           quantityM: "",
           unitM: 0,
@@ -43,6 +45,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({titulo,subtitulo}) => {
       await axios.post(`/api/User?user_id=${userInfo.data.sub}`, {user} );
 
       setSessionId(userInfo.data.sub);
+      router.push('/Inicio');
       console.log("ID de sesión: ", sessionId)
       }catch (err){
         console.log(err);
