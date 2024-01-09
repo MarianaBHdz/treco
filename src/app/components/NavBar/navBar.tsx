@@ -4,16 +4,73 @@ import './navBar.css'
 import { FaBars } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
 import { IoIosArrowDown } from "react-icons/io";
-import{useEffect} from 'react';
+import{useState, useEffect} from 'react';
 import { useRouter } from 'next/navigation';
-import { useSession } from '../context/SessionContext';
+import { useSession} from '../context/SessionContext';
+import  axios  from 'axios';
 
 export default function NavBar(){
-    const {sessionId} = useSession();
+    const {sessionId,logout} = useSession();
+    const [session, setSession] = useState(false);
+    const [admin, setA] = useState(false);
+    const [vendedor,setVen] = useState(false);
+    const [cliente, setC] = useState(false);
+    const [vende, setV] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState<any>({});
+    const [show1,setShow1] = useState(false);
+
+    function isAdmin(userId:string){
+        console.log("Buscando si el usuario es administrador: ",userId);
+        axios.get('/api/User?user_id='+userId)
+        .then((response) => {
+            console.log('Respuesta completa: ', response.data);
+            console.log('Rol del usuario: ', response.data.user.role);
+            const userRole = response.data.user.role.toUpperCase();
+            const nombre = response.data.user.name;
+            if (userRole === 'ADMIN') {
+                console.log('Es admin');
+                setA(true);
+            } else if (userRole === 'CONSUMER'){
+                console.log('Es un cliente');
+                setC(true);
+                setA(false);
+            }else{
+                setVen(true);
+                setA(false);
+            }
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    }
+
+    function hasStore(userId: string) {
+        console.log("Buscando si tiene tienda el usuario ",userId);
+        axios.get('http://localhost:3000/api/User/store?user_id='+userId)
+            .then((response) => {
+              console.log('STORE CHECKING: ', response.data);
+              if (response.data.user_store) {
+                console.log('Es vendedor');
+                setV(true);
+              } else {
+                setV(false);
+              }
+              setLoading(false);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+    }
+
 
     useEffect(() =>{
         if(sessionId){
             console.log("ID de sesión: ", sessionId);
+            setSession(true);
+            isAdmin(sessionId);
+            hasStore(sessionId);
         }
     },[sessionId]);
 
@@ -40,39 +97,50 @@ export default function NavBar(){
         
     }, []);
 
-    const isAdmin = false;
-    const session = true;
-    const isSeller = false;
+    useEffect(() => {
+        axios.get('/api/User?user_id=' + sessionId)
+            .then((response: any) => {
+                console.log(response.data.user);
+                setUser(response.data.user);
+            })
+            .catch((error: any) => {
+                console.log(error);
+            });
+    }, []);
 
-    return(
+    const prueba = true;
+    const pruebaS = true;
+
+    return (
         <header className="header">
-            {
-            isAdmin?
-            <nav className="navbar-admin">
-                <div className="logo">
-                    <img src="/logo.png" alt="Logo TRECO" onClick={() => {router.push('/');}} className='logo-img'/>
-                </div>
-                <div className="navbar-admin-text-container">
-                    <h1 className="navbar-admin-h1">Bienvenido al perfil del administrador</h1>
-                </div>
-                <button className="nav-toggle" aria-label='Abrir menú'><FaBars /></button>
-                <ul className="nav-menu">
-                    <li className="nav-menu-item">
-                        <a href="/adminCoupons" className="nav-menu-link nav-link ">Administrar Eventos</a>
-                    </li>
-                    <li className="nav-menu-item">
-                        <a href="/adminEvents" className="nav-menu-link nav-link nav-menu-link_active">Administrar Cupones</a>
-                    </li>
-                </ul>
-            </nav>
-                :                
-                <nav className="navbar">
+            {session ? (
+                
+                admin ? (
+                    <nav className="navbar-admin">
+                        <div className="logo">
+                            <img src="/logo.png" alt="Logo TRECO" onClick={() => { router.push('/'); }} className='logo-img' />
+                        </div>
+                        <div className="navbar-admin-text-container">
+                            <h1 className="navbar-admin-h1">Bienvenido al perfil del administrador</h1>
+                        </div>
+                        <button className="nav-toggle" aria-label='Abrir menú'><FaBars /></button>
+                        <ul className="nav-menu">
+                            <li className="nav-menu-item">
+                                <a href="/adminCoupons" className="nav-menu-link nav-link ">Administrar Eventos</a>
+                            </li>
+                            <li className="nav-menu-item">
+                                <a href="/adminEvents" className="nav-menu-link nav-link nav-menu-link_active">Administrar Cupones</a>
+                            </li>
+                        </ul>
+                    </nav>
+                //) : vendedor ? (
+                    ) : vendedor ? (
+                    <nav className="navbar">
                     <div className="logo">
-                        <img src="/logo.png" alt="Logo TRECO" onClick={() => {router.push('/');}} className='logo-img'/>
+                        <img src="/logo.png" alt="Logo TRECO" onClick={() => { router.push('/'); }} className='logo-img' />
                     </div>
                     <button className="nav-toggle" aria-label='Abrir menú'><FaBars /></button>
                     <ul className="nav-menu">
-                        
                         <li className="nav-menu-item">
                             <a href="/clientEvents" className="nav-menu-link nav-link ">Eventos</a>
                         </li>
@@ -86,7 +154,100 @@ export default function NavBar(){
                             <a href="/Conocenos" className="nav-menu-link nav-link nav-menu-link_active">Conócenos</a>
                         </li>
                         <li className="nav-menu-item">
-                            <button className="nav-icono" onClick={() => {router.push('/Login');}} aria-label='icono'><FaCircleUser /></button>
+                            <a href="/MiTiendaInicio" className="nav-menu-link nav-link nav-menu-link_active">Mi tienda</a>
+                        </li>
+                        <li className="nav-menu-item">
+                            <button className="nav-icono" onClick={() => { router.push('/Login'); }} aria-label='icono'><FaCircleUser /></button>
+                        </li>
+                        <li className="nav-menu-item">
+                            <button className="nav-button" onMouseOver={()=>setShow1(true)} onMouseOut={()=>setShow1(true)} onClick={() => {}}>
+                                Hola {user?.name ? user?.name.split(' ')[0] : 'Usuario'} <IoIosArrowDown />
+                            </button>
+                            
+                            {show1?
+                            <div className='dropdownPerfil' onMouseOver={()=>setShow1(true)} onMouseOut={() => setShow1(false)}>
+                                <div style={{marginTop:4}}>
+                                    <span style={{marginLeft:20,fontSize:18, fontWeight:"bold"}}>Hola {user?.name ? user?.name.split(' ')[0] : 'Usuario'}</span><br/>
+                                    <div style={{backgroundColor:"gray",height:2,width:150,marginLeft:5,marginBottom:7,marginTop:5}}></div>
+                                    <button className='ddbutton' onClick={() => {router.push('/clientInformation'); setShow1(false);}}>Mi Perfil</button><br/>
+                                    <button className='ddbutton' onClick={() => {router.push('/clientCoupons'); setShow1(false);}}>Mis Cupones</button><br/>
+                                    <button className='ddbutton' onClick={() => { logout(); setShow1(false); }} >Cerrar Sesión</button><br/>
+                                </div>
+                            </div>:null}
+                        </li>
+                        <li className="nav-menu-item">
+                            <a href="/clientCoupons" className="nav-menu-link nav-link nav-menu-link_active">Mis Cupones</a>
+                        </li>
+                    </ul>
+                </nav>
+                ) : (
+                    <nav className="navbar">
+                    <div className="logo">
+                        <img src="/logo.png" alt="Logo TRECO" onClick={() => { router.push('/'); }} className='logo-img' />
+                    </div>
+                    <button className="nav-toggle" aria-label='Abrir menú'><FaBars /></button>
+                    <ul className="nav-menu">
+                        <li className="nav-menu-item">
+                            <a href="/clientEvents" className="nav-menu-link nav-link ">Eventos</a>
+                        </li>
+                        <li className="nav-menu-item">
+                            <a href="/clientStores" className="nav-menu-link nav-link nav-menu-link_active">Tiendas Y Productos</a>
+                        </li>
+                        <li className="nav-menu-item">
+                            <a href="/Ayuda" className="nav-menu-link nav-link nav-menu-link_active">Ayuda</a>
+                        </li>
+                        <li className="nav-menu-item">
+                            <a href="/Conocenos" className="nav-menu-link nav-link nav-menu-link_active">Conócenos</a>
+                        </li>
+                        <li className="nav-menu-item">
+                            <a href="/MiTiendaInicio" className="nav-menu-link nav-link nav-menu-link_active">Cliente</a>
+                        </li>
+                        <li className="nav-menu-item">
+                            <button className="nav-icono" onClick={() => { router.push('/Login'); }} aria-label='icono'><FaCircleUser /></button>
+                        </li>
+                        <li className="nav-menu-item">
+                            <button className="nav-button" onMouseOver={()=>setShow1(true)} onMouseOut={()=>setShow1(true)} onClick={() => {}}>
+                                Hola {user?.name ? user?.name.split(' ')[0] : 'Usuario'} <IoIosArrowDown />
+                            </button>
+                            
+                            {show1?
+                            <div className='dropdownPerfil' onMouseOver={()=>setShow1(true)} onMouseOut={() => setShow1(false)}>
+                                <div style={{marginTop:4}}>
+                                    <span style={{marginLeft:20,fontSize:18, fontWeight:"bold"}}>Hola {user?.name ? user?.name.split(' ')[0] : 'Usuario'}</span><br/>
+                                    <div style={{backgroundColor:"gray",height:2,width:150,marginLeft:5,marginBottom:7,marginTop:5}}></div>
+                                    <button className='ddbutton' onClick={() => {router.push('/clientInformation'); setShow1(false);}}>Mi Perfil</button><br/>
+                                    <button className='ddbutton' onClick={() => {router.push('/clientCoupons'); setShow1(false);}}>Mis Cupones</button><br/>
+                                    <button className='ddbutton' onClick={() => { logout(); setShow1(false); }} >Cerrar Sesión</button><br/>
+                                </div>
+                            </div>:null}
+                        </li>
+                        <li className="nav-menu-item">
+                            <a href="/clientCoupons" className="nav-menu-link nav-link nav-menu-link_active">Mis Cupones</a>
+                        </li>
+                    </ul>
+                </nav>
+                )
+            ) : (
+                <nav className="navbar">
+                    <div className="logo">
+                        <img src="/logo.png" alt="Logo TRECO" onClick={() => { router.push('/'); }} className='logo-img' />
+                    </div>
+                    <button className="nav-toggle" aria-label='Abrir menú'><FaBars /></button>
+                    <ul className="nav-menu">
+                        <li className="nav-menu-item">
+                            <a href="/clientEvents" className="nav-menu-link nav-link ">Eventos</a>
+                        </li>
+                        <li className="nav-menu-item">
+                            <a href="/clientStores" className="nav-menu-link nav-link nav-menu-link_active">Tiendas Y Productos</a>
+                        </li>
+                        <li className="nav-menu-item">
+                            <a href="/Ayuda" className="nav-menu-link nav-link nav-menu-link_active">Ayuda</a>
+                        </li>
+                        <li className="nav-menu-item">
+                            <a href="/Conocenos" className="nav-menu-link nav-link nav-menu-link_active">Conócenos</a>
+                        </li>
+                        <li className="nav-menu-item">
+                            <button className="nav-icono" onClick={() => { router.push('/Login'); }} aria-label='icono'><FaCircleUser /></button>
                         </li>
                         <li className="nav-menu-item">
                             <a href="/CreateAccount" className="nav-menu-link nav-link nav-menu-link_active">Crea Tu Cuenta</a>
@@ -96,7 +257,7 @@ export default function NavBar(){
                         </li>
                     </ul>
                 </nav>
-            }
+            )}
         </header>
     )
 }

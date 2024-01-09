@@ -79,7 +79,7 @@
     background: none;
     border: none;
     font-size: 35px;
-    padding: 15px 20px;
+    padding: 15px 10px;
     line-height: 60px;
     cursor: pointer;
 }
@@ -104,6 +104,56 @@
     text-transform: uppercase;
     color: #ECE3CE;
 }
+
+.ddbutton:hover{
+    background-color: #ECE3CE;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.ddbutton{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    background: none;
+    border: none;
+}
+
+.nav-button{
+    padding: 8px 12px;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 20px;
+    font-size: 16px;
+    border-color: #ECE3CE;
+    color: #ECE3CE;
+    background: none;
+    width: 150px;
+    height: auto;
+    cursor: pointer;
+    font-family: '__Inter_e66fe9', '__Inter_Fallback_e66fe9';
+}
+
+.nav-button:hover{
+    background-color: #ECE3CE;
+    color: #3A4D39;
+    transition: 0.5s;
+}
+
+.dropdownPerfil {
+    border-radius: 15px;
+    position: absolute;
+    display: block;
+    background-color: white;
+    border: 1px solid #d9d9d9;
+    line-height: 1;
+    height: auto;
+    width: 160px;
+    margin-top: 0px;
+    margin-left: 10px;
+    font-size: 10;
+  }
 
 @media (max-width: 768px){
     .header{
