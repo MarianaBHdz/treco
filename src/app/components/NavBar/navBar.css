@@ -54,12 +54,14 @@
     border-style: solid;
     border-radius: 20px;
     border-color: #ECE3CE;
+    cursor: pointer;
 }
 
 .nav-menu-link:hover{
     background-color: #ECE3CE;
     color: #3A4D39;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 .nav-toggle{
@@ -118,6 +120,7 @@
     font-size: 16px;
     background: none;
     border: none;
+    cursor: pointer;
 }
 
 .nav-button{
@@ -129,7 +132,7 @@
     border-color: #ECE3CE;
     color: #ECE3CE;
     background: none;
-    width: 150px;
+    width: auto;
     height: auto;
     cursor: pointer;
     font-family: '__Inter_e66fe9', '__Inter_Fallback_e66fe9';
@@ -149,9 +152,7 @@
     border: 1px solid #d9d9d9;
     line-height: 1;
     height: auto;
-    width: 160px;
-    margin-top: 0px;
-    margin-left: 10px;
+    width: auto;
     font-size: 10;
   }
 

@@ -19,6 +19,7 @@ export default function NavBar(){
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState<any>({});
     const [show1,setShow1] = useState(false);
+    const [logoutClicked, setLogoutClicked] = useState(false);
 
     function isAdmin(userId:string){
         console.log("Buscando si el usuario es administrador: ",userId);
@@ -64,7 +65,6 @@ export default function NavBar(){
             });
     }
 
-
     useEffect(() =>{
         if(sessionId){
             console.log("ID de sesión: ", sessionId);
@@ -108,8 +108,18 @@ export default function NavBar(){
             });
     }, []);
 
-    const prueba = true;
-    const pruebaS = true;
+    const handleLogout = () => {
+        // Set logoutClicked to true before calling logout
+        setLogoutClicked(true);
+        logout();
+    };
+
+    useEffect(() => {
+        if (!sessionId && logoutClicked) {
+            // Redirect to "/Inicio" only if logout was clicked
+            setSession(false);
+        }
+    }, [sessionId, logoutClicked]);
 
     return (
         <header className="header">
@@ -118,7 +128,7 @@ export default function NavBar(){
                 admin ? (
                     <nav className="navbar-admin">
                         <div className="logo">
-                            <img src="/logo.png" alt="Logo TRECO" onClick={() => { router.push('/'); }} className='logo-img' />
+                            <img src="/logo.png" alt="Logo TRECO" onClick={() => { router.push('/adminHome'); }} className='logo-img' />
                         </div>
                         <div className="navbar-admin-text-container">
                             <h1 className="navbar-admin-h1">Bienvenido al perfil del administrador</h1>
@@ -126,10 +136,10 @@ export default function NavBar(){
                         <button className="nav-toggle" aria-label='Abrir menú'><FaBars /></button>
                         <ul className="nav-menu">
                             <li className="nav-menu-item">
-                                <a href="/adminCoupons" className="nav-menu-link nav-link ">Administrar Eventos</a>
+                                <a className="nav-menu-link nav-link " onClick={() => { router.push('/adminCoupons'); }}>Administrar Eventos</a>
                             </li>
                             <li className="nav-menu-item">
-                                <a href="/adminEvents" className="nav-menu-link nav-link nav-menu-link_active">Administrar Cupones</a>
+                                <a className="nav-menu-link nav-link nav-menu-link_active" onClick={() => { router.push('/adminEvents'); }}>Administrar Cupones</a>
                             </li>
                         </ul>
                     </nav>
@@ -142,22 +152,22 @@ export default function NavBar(){
                     <button className="nav-toggle" aria-label='Abrir menú'><FaBars /></button>
                     <ul className="nav-menu">
                         <li className="nav-menu-item">
-                            <a href="/clientEvents" className="nav-menu-link nav-link ">Eventos</a>
+                            <a className="nav-menu-link nav-link" onClick={() => { router.push('/clientEvents'); }}>Eventos</a>
                         </li>
                         <li className="nav-menu-item">
-                            <a href="/clientStores" className="nav-menu-link nav-link nav-menu-link_active">Tiendas Y Productos</a>
+                            <a className="nav-menu-link nav-link nav-menu-link_active" onClick={() => { router.push('/clientStores'); }}>Tiendas Y Productos</a>
                         </li>
                         <li className="nav-menu-item">
-                            <a href="/Ayuda" className="nav-menu-link nav-link nav-menu-link_active">Ayuda</a>
+                            <a className="nav-menu-link nav-link nav-menu-link_active" onClick={() => { router.push('/Ayuda'); }}>Ayuda</a>
                         </li>
                         <li className="nav-menu-item">
-                            <a href="/Conocenos" className="nav-menu-link nav-link nav-menu-link_active">Conócenos</a>
+                            <a className="nav-menu-link nav-link nav-menu-link_active" onClick={() => { router.push('/Conocenos'); }}>Conócenos</a>
                         </li>
                         <li className="nav-menu-item">
-                            <a href="/MiTiendaInicio" className="nav-menu-link nav-link nav-menu-link_active">Mi tienda</a>
+                            <a  className="nav-menu-link nav-link nav-menu-link_active" onClick={() => { router.push('/MiTienda'); }}>Mi tienda</a>
                         </li>
                         <li className="nav-menu-item">
-                            <button className="nav-icono" onClick={() => { router.push('/Login'); }} aria-label='icono'><FaCircleUser /></button>
+                            <button className="nav-icono" aria-label='icono'><FaCircleUser /></button>
                         </li>
                         <li className="nav-menu-item">
                             <button className="nav-button" onMouseOver={()=>setShow1(true)} onMouseOut={()=>setShow1(true)} onClick={() => {}}>
@@ -167,16 +177,16 @@ export default function NavBar(){
                             {show1?
                             <div className='dropdownPerfil' onMouseOver={()=>setShow1(true)} onMouseOut={() => setShow1(false)}>
                                 <div style={{marginTop:4}}>
-                                    <span style={{marginLeft:20,fontSize:18, fontWeight:"bold"}}>Hola {user?.name ? user?.name.split(' ')[0] : 'Usuario'}</span><br/>
-                                    <div style={{backgroundColor:"gray",height:2,width:150,marginLeft:5,marginBottom:7,marginTop:5}}></div>
+                                    <span style={{marginLeft:20,fontSize:18, fontWeight:"bold", marginRight:20}}>Hola {user?.name ? user?.name.split(' ')[0] : 'Usuario'}</span><br/>
+                                    <div style={{backgroundColor:"gray",height:2,width:"auto",marginLeft:5,marginBottom:7,marginTop:5,marginRight:5}}></div>
                                     <button className='ddbutton' onClick={() => {router.push('/clientInformation'); setShow1(false);}}>Mi Perfil</button><br/>
                                     <button className='ddbutton' onClick={() => {router.push('/clientCoupons'); setShow1(false);}}>Mis Cupones</button><br/>
-                                    <button className='ddbutton' onClick={() => { logout(); setShow1(false); }} >Cerrar Sesión</button><br/>
+                                    <button className='ddbutton' onClick={() => {handleLogout(); setShow1(false); }} >Cerrar Sesión</button><br/>
                                 </div>
                             </div>:null}
                         </li>
                         <li className="nav-menu-item">
-                            <a href="/clientCoupons" className="nav-menu-link nav-link nav-menu-link_active">Mis Cupones</a>
+                            <a className="nav-menu-link nav-link nav-menu-link_active" onClick={() => { router.push('/clientCoupons'); }}>Mis Cupones</a>
                         </li>
                     </ul>
                 </nav>
@@ -187,23 +197,23 @@ export default function NavBar(){
                     </div>
                     <button className="nav-toggle" aria-label='Abrir menú'><FaBars /></button>
                     <ul className="nav-menu">
-                        <li className="nav-menu-item">
-                            <a href="/clientEvents" className="nav-menu-link nav-link ">Eventos</a>
+                    <li className="nav-menu-item">
+                            <a className="nav-menu-link nav-link" onClick={() => { router.push('/clientEvents'); }}>Eventos</a>
                         </li>
                         <li className="nav-menu-item">
-                            <a href="/clientStores" className="nav-menu-link nav-link nav-menu-link_active">Tiendas Y Productos</a>
+                            <a className="nav-menu-link nav-link nav-menu-link_active" onClick={() => { router.push('/clientStores'); }}>Tiendas Y Productos</a>
                         </li>
                         <li className="nav-menu-item">
-                            <a href="/Ayuda" className="nav-menu-link nav-link nav-menu-link_active">Ayuda</a>
+                            <a className="nav-menu-link nav-link nav-menu-link_active" onClick={() => { router.push('/Ayuda'); }}>Ayuda</a>
                         </li>
                         <li className="nav-menu-item">
-                            <a href="/Conocenos" className="nav-menu-link nav-link nav-menu-link_active">Conócenos</a>
+                            <a className="nav-menu-link nav-link nav-menu-link_active" onClick={() => { router.push('/Conocenos'); }}>Conócenos</a>
                         </li>
                         <li className="nav-menu-item">
-                            <a href="/MiTiendaInicio" className="nav-menu-link nav-link nav-menu-link_active">Cliente</a>
+                            <a  className="nav-menu-link nav-link nav-menu-link_active" onClick={() => { router.push('/MiTiendaInicio'); }}>Mi tienda</a>
                         </li>
                         <li className="nav-menu-item">
-                            <button className="nav-icono" onClick={() => { router.push('/Login'); }} aria-label='icono'><FaCircleUser /></button>
+                            <button className="nav-icono" aria-label='icono'><FaCircleUser /></button>
                         </li>
                         <li className="nav-menu-item">
                             <button className="nav-button" onMouseOver={()=>setShow1(true)} onMouseOut={()=>setShow1(true)} onClick={() => {}}>
@@ -213,16 +223,16 @@ export default function NavBar(){
                             {show1?
                             <div className='dropdownPerfil' onMouseOver={()=>setShow1(true)} onMouseOut={() => setShow1(false)}>
                                 <div style={{marginTop:4}}>
-                                    <span style={{marginLeft:20,fontSize:18, fontWeight:"bold"}}>Hola {user?.name ? user?.name.split(' ')[0] : 'Usuario'}</span><br/>
-                                    <div style={{backgroundColor:"gray",height:2,width:150,marginLeft:5,marginBottom:7,marginTop:5}}></div>
+                                    <span style={{marginLeft:20,fontSize:18, fontWeight:"bold", marginRight:20}}>Hola {user?.name ? user?.name.split(' ')[0] : 'Usuario'}</span><br/>
+                                    <div style={{backgroundColor:"gray",height:2,width:"auto",marginLeft:5,marginBottom:7,marginTop:5,marginRight:5}}></div>
                                     <button className='ddbutton' onClick={() => {router.push('/clientInformation'); setShow1(false);}}>Mi Perfil</button><br/>
                                     <button className='ddbutton' onClick={() => {router.push('/clientCoupons'); setShow1(false);}}>Mis Cupones</button><br/>
-                                    <button className='ddbutton' onClick={() => { logout(); setShow1(false); }} >Cerrar Sesión</button><br/>
+                                    <button className='ddbutton' onClick={() => {router.push('/Inicio'); handleLogout(); setShow1(false); }} >Cerrar Sesión</button><br/>
                                 </div>
                             </div>:null}
                         </li>
                         <li className="nav-menu-item">
-                            <a href="/clientCoupons" className="nav-menu-link nav-link nav-menu-link_active">Mis Cupones</a>
+                            <a className="nav-menu-link nav-link nav-menu-link_active" onClick={() => { router.push('/clientCoupons'); }}>Mis Cupones</a>
                         </li>
                     </ul>
                 </nav>

@@ -41,11 +41,19 @@ export const LoginCard: React.FC<LoginCardProps> = ({titulo,subtitulo}) => {
         },
         email: userInfo.data.email,
       };
+
+    
       
       await axios.post(`/api/User?user_id=${userInfo.data.sub}`, {user} );
 
       setSessionId(userInfo.data.sub);
-      router.push('/Inicio');
+      if(userInfo.data.sub === "104967533410435516052"){
+        router.push('/adminHome');
+        console.log("Es admin", userInfo.data.sub)
+      }else{
+        router.push('/Inicio');
+        console.log("Es cliente", userInfo.data.sub)
+      }
       console.log("ID de sesión: ", sessionId)
       }catch (err){
         console.log(err);
