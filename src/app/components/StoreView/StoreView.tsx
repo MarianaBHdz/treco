@@ -1,6 +1,8 @@
 'use client'
 import './StoreView.css';
-import React, { PropsWithoutRef } from 'react';
+import React, { PropsWithoutRef, useEffect, useState} from 'react';
+import { useRouter } from 'next/navigation';
+
 interface StoreView{
   dataimage: string;
   dataname:string;
