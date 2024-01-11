@@ -3,7 +3,7 @@ import { useState } from 'react';
 import React from 'react';
 import * as Yup from 'yup';
 import { SForm, Slabel, SField, SErrorMessage ,Cbutton,Sbutton,DivSend,Ddiv,Ibutton,DdivLarge,DivAdj,Cdiv,SAsterisk} from './FormCCoupons.style';
-import {SuccessPerfil} from '../confirmations/SuccessPerfil';
+import {RecyclingIdeas} from '../ideas/RecyclingIdeas';
 import CancelConfirmation from '../confirmations/CancelConfirmation';
 import axios from 'axios';
 
@@ -92,34 +92,73 @@ const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => {
         //handleSubmit(userID,values)
         //console.log('Estos son los que se envian',values)
 
-        // Obtenemos los valores del formulario
+        // Get the values from the form
         const { unitM, quantityM, material } = values;
-
-        // Calculamos el valor de numCoupons en base a los valores del formulario
         let calculatedNumCoupons = 0;
 
-        if (unitM == 1) {
-          // Si ambos unitM y quantityM tienen valores
-          calculatedNumCoupons = unitM * parseFloat(quantityM);
-
-          // Dependiendo del valor de material, hacemos otra multiplicación
-          if (material === 1) {
-            // Si el material es 1 (Aluminio)
-            calculatedNumCoupons *= 2;
-          } else if (material === 2) {
-            // Si el material es 2 (Botellas de vidrio)
-            calculatedNumCoupons *= 3;
+        if (unitM == 1) { //piezas
+          if (material === 1) { // If the material is 1 (Aluminio)
+            calculatedNumCoupons = parseInt(quantityM,10) * 15; //Because each can weighs 15gr
+            calculatedNumCoupons = Math.round(calculatedNumCoupons * 0.16);
+          }else if (material === 2) { // If the material is 2 (Botellas de vidrio)
+            calculatedNumCoupons = parseInt(quantityM,10) * 400; //Because each thing weighs 400gr
+            calculatedNumCoupons = Math.round(calculatedNumCoupons * 0.007);
+          }else if (material === 3) { // If the material is 3 (Latas de fierro)
+            calculatedNumCoupons = parseInt(quantityM,10) * 25; //Because each thing weighs 25gr
+            calculatedNumCoupons = Math.round(calculatedNumCoupons * 0.028);
+          }else if (material === 4) { // If the material is 4 (HDPE)
+            calculatedNumCoupons = parseInt(quantityM,10) * 90; //Because each thing weighs 90gr
+            calculatedNumCoupons = Math.round(calculatedNumCoupons * 0.064);
+          }else if (material === 5) { // If the material is 5 (PET)
+            calculatedNumCoupons = parseInt(quantityM,10) * 40; //Because each thing weighs 40gr
+            calculatedNumCoupons = Math.round(calculatedNumCoupons * 0.056);
+          }else if (material === 6) { // If the material is 6 (Papel)
+            calculatedNumCoupons = parseInt(quantityM,10) * 70; //Because each thing weighs 70gr
+            calculatedNumCoupons = Math.round(calculatedNumCoupons * 0.028);
+          }else if (material === 7) { // If the material is 7 (Carton)
+            calculatedNumCoupons = parseInt(quantityM,10) * 500; //Because each thing weighs 500gr
+            calculatedNumCoupons = Math.round(calculatedNumCoupons * 0.024);
+          }else if (material === 8) { // If the material is 8 (Tetrapack)
+            calculatedNumCoupons = parseInt(quantityM,10) * 400; //Because each thing weighs 400gr
+            calculatedNumCoupons = Math.round(calculatedNumCoupons * 0.020);
+          }else if (material === 9) { // If the material is 9 (Aceite de cocina)
+            calculatedNumCoupons = 0; //Because each thing weighs 15gr
+          }else if (material === 10) { // If the material is 10 (Residuos electronicos)
+            calculatedNumCoupons = parseInt(quantityM,10) * 20; 
+          }else if (material === 11) { // If the material is 11 (Residuos electricos)
+            calculatedNumCoupons = parseInt(quantityM,10) * 20; 
           }
-          // Puedes agregar más condiciones para otros materiales según sea necesario
-        }else{
-          
+        }else if (unitM == 2){ //kilogramos
+          calculatedNumCoupons = parseInt(quantityM,10);
+          if (material === 1) { // If the material is 1 (Aluminio)
+            calculatedNumCoupons = Math.round(calculatedNumCoupons * 160);
+          }else if (material === 2) { // If the material is 2 (Botellas de vidrio)
+            calculatedNumCoupons = Math.round(calculatedNumCoupons * 7);
+          }else if (material === 3) { // If the material is 3 (Latas de fierro)
+            calculatedNumCoupons = Math.round(calculatedNumCoupons * 28);
+          }else if (material === 4) { // If the material is 4 (HDPE)
+            calculatedNumCoupons = Math.round(calculatedNumCoupons * 64);
+          }else if (material === 5) { // If the material is 5 (PET)
+            calculatedNumCoupons = Math.round(calculatedNumCoupons * 56);
+          }else if (material === 6) { // If the material is 6 (Papel)
+            calculatedNumCoupons = Math.round(calculatedNumCoupons * 28);
+          }else if (material === 7) { // If the material is 7 (Carton)
+            calculatedNumCoupons = Math.round(calculatedNumCoupons * 24);
+          }else if (material === 8) { // If the material is 8 (Tetrapack)
+            calculatedNumCoupons = Math.round(calculatedNumCoupons * 20);
+          }else if (material === 9) { // If the material is 9 (Aceite de cocina)
+            calculatedNumCoupons = 0; //Because each thing weighs 15gr
+          }else if (material === 10) { // If the material is 10 (Residuos electronicos)
+            calculatedNumCoupons = parseInt(quantityM,10) * 100; 
+          }else if (material === 11) { // If the material is 11 (Residuos electricos)
+            calculatedNumCoupons = parseInt(quantityM,10) * 100; 
+          }
         }
-
         // Asignamos el valor calculado a numCoupons en los valores del formulario
-        const updatedValues = { ...values, numCoupons: calculatedNumCoupons };
+        const updatedValues = { ...values, unitM: calculatedNumCoupons };
 
         // Llamamos a la función handleSubmit con los valores actualizados
-        handleSubmit(userID, updatedValues);
+        handleSubmit(userID, updatedValues); // <-- Aquí deberías enviar updatedValues
 
         console.log('Estos son los que se envian', updatedValues);
       }}
@@ -188,7 +227,7 @@ const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => {
             </DivSend>
         </SForm>
         
-        {isSuccessModalOpen && <SuccessPerfil onClose={() => {setIsSuccessModalOpen(false);onAccept();window.location.reload();}} />}
+        {isSuccessModalOpen && <RecyclingIdeas onClose={() => {setIsSuccessModalOpen(false);onAccept();window.location.reload();}} />}
         {isCancelConfirmationOpen && (
         <CancelConfirmation
         onClose={() => setIsCancelConfirmationOpen(false)}
