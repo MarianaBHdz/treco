@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { createContext, useContext, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface SessionContextProps {
   sessionId: string | null;
@@ -17,11 +18,12 @@ const SessionContext = React.createContext<SessionContextProps>({
 
 export const SessionProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [sessionId, setSessionId] = useState<string | null>(null);
+    const router = useRouter();
+
     const logout = () => {
       // Add any additional logout logic here
       setSessionId(null);
       console.log('Se cerro la sesión')
-      window.location.reload();
     };
 
     return (
