@@ -181,7 +181,7 @@ export default function NavBar(){
                                     <div style={{backgroundColor:"gray",height:2,width:"auto",marginLeft:5,marginBottom:7,marginTop:5,marginRight:5}}></div>
                                     <button className='ddbutton' onClick={() => {router.push('/clientInformation'); setShow1(false);}}>Mi Perfil</button><br/>
                                     <button className='ddbutton' onClick={() => {router.push('/clientCoupons'); setShow1(false);}}>Mis Cupones</button><br/>
-                                    <button className='ddbutton' onClick={() => {handleLogout(); setShow1(false); }} >Cerrar Sesión</button><br/>
+                                    <button className='ddbutton' onClick={() => {router.push('/Inicio'); handleLogout(); setShow1(false); }} >Cerrar Sesión</button><br/>
                                 </div>
                             </div>:null}
                         </li>
