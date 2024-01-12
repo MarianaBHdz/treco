@@ -47,6 +47,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({titulo,subtitulo}) => {
       await axios.post(`/api/User?user_id=${userInfo.data.sub}`, {user} );
 
       setSessionId(userInfo.data.sub);
+      localStorage.setItem('sessionId', userInfo.data.sub);
       if(userInfo.data.sub === "104967533410435516052"){
         router.push('/adminHome');
         console.log("Es admin", userInfo.data.sub)
