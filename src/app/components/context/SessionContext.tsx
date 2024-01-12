@@ -17,17 +17,22 @@ const SessionContext = React.createContext<SessionContextProps>({
 });
 
 export const SessionProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [sessionId, setSessionId] = useState<string | null>(null);
+  const [sessionId, setSessionId] = useState<string | null>(() => {
+    // Check if localStorage is available before using it
+    return typeof window !== 'undefined' ? localStorage.getItem('sessionId') : null;
+  });
     const router = useRouter();
 
     const logout = () => {
-      // Add any additional logout logic here
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('sessionId');
+      }
       setSessionId(null);
       console.log('Se cerro la sesión')
     };
 
     return (
-      <SessionContext.Provider value={{ sessionId, setSessionId,logout }}>
+      <SessionContext.Provider value={{ sessionId, setSessionId, logout }}>
         {children}
       </SessionContext.Provider>
     );
