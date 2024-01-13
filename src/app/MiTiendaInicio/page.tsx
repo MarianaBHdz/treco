@@ -21,7 +21,7 @@ export default function MiTiendaInicio() {
             <p className="p-mitiendainicio">TRECO es una plataforma dedicada al reciclaje y la sostenibilidad, y queremos que tú formes parte de nuestra familia</p>
         </div>
         <div className="container-button-mitiendainicio">
-        <button className='button-mitiendainicio' onClick={() => {router.push('/CrearTienda');}}>Crear Tienda</button>
+        <button className='button-mitiendainicio' onClick={() => {router.push('/CreateStore');}}>Crear Tienda</button>
         </div>
     </div>
   );
