@@ -109,8 +109,11 @@ const Header = styled.div`
 
   }
 `;
-
-export const SuccessPerfil: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+interface SuccessPerfilProps {
+  onClose: () => void;
+  successMessage: string;
+}
+export const SuccessPerfil: React.FC<SuccessPerfilProps> = ({ onClose, successMessage }) => {
   return (
     <ModalOverlay onClick={onClose}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
@@ -119,7 +122,7 @@ export const SuccessPerfil: React.FC<{ onClose: () => void }> = ({ onClose }) =>
           <SuccessIcon />
           <h2>¡Listo!</h2>
         </Header>
-        <p>Se han guardado exitosamente los cambios de su información</p>
+        <p>{successMessage}</p>
       </ModalContent>
     </ModalOverlay>
   );
