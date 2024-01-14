@@ -107,6 +107,15 @@
     color: #ECE3CE;
 }
 
+.logout-admin{
+    font-size: 30px;
+    margin-top: 23px;
+    color: #ECE3CE;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
 .ddbutton:hover{
     background-color: #ECE3CE;
     border-radius: 5px;
