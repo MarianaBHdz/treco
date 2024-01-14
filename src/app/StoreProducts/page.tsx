@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useSession } from '../components/context/SessionContext';
 import RWDModal from '../components/ModalPopup/RWDModal';
 import FormCreateProduct from '../components/FormCreateProduct/FormCreateProduct';
+import { BiLoaderCircle } from "react-icons/bi";
 
 export default function StoreProducts() {
     const {sessionId} = useSession();
@@ -69,6 +70,8 @@ export default function StoreProducts() {
                 <div className="container-div-sinproductos-storeproducts">
                     <button className="button-sinproductos-storeproducts" onClick={toggleModal}>Agregar producto</button>
                 </div>
+                <RWDModal header="Agregar Producto"onBackdropClick={toggleModal} isModalVisible={isModalVisible} message="* Campos obligatorios" content={<FormCreateProduct storeId={storeid} onAccept={toggleModal}/>}/>
+                <div id = "modal-root"></div>
             </div>
         ) : (
             <>
@@ -85,12 +88,19 @@ export default function StoreProducts() {
             <div className="container-div-sinproductos-storeproducts">
                 <button className="button-sinproductos-storeproducts" onClick={toggleModal}>Agregar producto</button>
             </div>
-            <RWDModal header="Agregar Producto"onBackdropClick={toggleModal} isModalVisible={isModalVisible} message="* Campos obligatorios" content={<FormCreateProduct storeId={storeid} productoS={{ name: '', thumbnail_url: '' }}  onAccept={toggleModal}/>}/>
+            <RWDModal header="Agregar Producto"onBackdropClick={toggleModal} isModalVisible={isModalVisible} message="* Campos obligatorios" content={<FormCreateProduct storeId={storeid} onAccept={toggleModal}/>}/>
             <div id = "modal-root"></div>
             </>
         )
         ) : (
-        <p>Cargando datos...</p>
+            <div className="cargando-storeproducts">
+                <div className="container-cargando-storeproducts">
+                    <BiLoaderCircle className="icon-cargando-storeproducts"/>
+                </div>
+                <div className="container-cargando-storeproducts">
+                    <h1 className="h1-cargando-storeproducts">Cargando datos...</h1>
+                </div>
+            </div>
         )}
       </div>
           
