@@ -4,6 +4,7 @@ import './navBar.css'
 import { FaBars } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
 import { IoIosArrowDown } from "react-icons/io";
+import { IoMdLogOut } from "react-icons/io";
 import{useState, useEffect} from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession} from '../context/SessionContext';
@@ -22,18 +23,13 @@ export default function NavBar(){
     const [logoutClicked, setLogoutClicked] = useState(false);
 
     function isAdmin(userId:string){
-        console.log("Buscando si el usuario es administrador: ",userId);
         axios.get('/api/User?user_id='+userId)
         .then((response) => {
-            console.log('Respuesta completa: ', response.data);
-            console.log('Rol del usuario: ', response.data.user.role);
             const userRole = response.data.user.role.toUpperCase();
             const nombre = response.data.user.name;
             if (userRole === 'ADMIN') {
-                console.log('Es admin');
                 setA(true);
             } else if (userRole === 'CONSUMER'){
-                console.log('Es un cliente');
                 setC(true);
                 setA(false);
             }else{
@@ -48,12 +44,9 @@ export default function NavBar(){
     }
 
     function hasStore(userId: string) {
-        console.log("Buscando si tiene tienda el usuario ",userId);
         axios.get('http://localhost:3000/api/User/store?user_id='+userId)
             .then((response) => {
-              console.log('STORE CHECKING: ', response.data);
               if (response.data.user_store) {
-                console.log('Es vendedor');
                 setV(true);
               } else {
                 setV(false);
@@ -67,7 +60,6 @@ export default function NavBar(){
 
     useEffect(() =>{
         if(sessionId){
-            console.log("ID de sesión: ", sessionId);
             setSession(true);
             isAdmin(sessionId);
             hasStore(sessionId);
@@ -100,7 +92,6 @@ export default function NavBar(){
     useEffect(() => {
         axios.get('/api/User?user_id=' + sessionId)
             .then((response: any) => {
-                console.log(response.data.user);
                 setUser(response.data.user);
             })
             .catch((error: any) => {
@@ -136,10 +127,13 @@ export default function NavBar(){
                         <button className="nav-toggle" aria-label='Abrir menú'><FaBars /></button>
                         <ul className="nav-menu">
                             <li className="nav-menu-item">
-                                <a className="nav-menu-link nav-link " onClick={() => { router.push('/adminCoupons'); }}>Administrar Eventos</a>
+                                <a className="nav-menu-link nav-link " onClick={() => { router.push('/adminEvents'); }}>Administrar Eventos</a>
                             </li>
                             <li className="nav-menu-item">
-                                <a className="nav-menu-link nav-link nav-menu-link_active" onClick={() => { router.push('/adminEvents'); }}>Administrar Cupones</a>
+                                <a className="nav-menu-link nav-link nav-menu-link_active" onClick={() => { router.push('/adminCoupons'); }}>Administrar Cupones</a>
+                            </li>
+                            <li className="nav-menu-item">
+                            <IoMdLogOut className="logout-admin" onClick={() => {router.push('/Inicio'); handleLogout(); setShow1(false); }}/>
                             </li>
                         </ul>
                     </nav>

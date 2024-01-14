@@ -52,7 +52,7 @@ export default function MiTienda() {
             <button className='button-mitienda' onClick={toggleModal}>Modificar información</button>
         </div>
         <div className='button-container-mitienda'>
-            <button className='button-mitienda' onClick={() => {router.push('/Productos');}}>Productos</button>
+            <button className='button-mitienda' onClick={() => {router.push('/StoreProducts');}}>Productos</button>
         </div>
         <div className='button-container-mitienda'>
             <button className='button-mitienda' onClick={() => {router.push('/CobrarCupones');}}>Cobrar cupones</button>

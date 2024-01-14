@@ -1,0 +1,86 @@
+.main-container-productstore {
+    height: 236px;
+    width: 172px;
+    margin: 2vh;
+}
+
+.image-container-productstore {
+    display: flex;
+    background-color: #ffffff;
+    border-color: #c4c4c4;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-radius: 5px 5px 0px 0px;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-style: solid;
+    border-top-width: 1px;
+    height: 172px;
+    overflow: hidden;
+    width: 172px;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-productstore {
+    height: 138px;
+    object-fit: cover;
+    width: 139px;
+}
+
+.name-container-productstore {
+    display: flex;
+    border: 1px solid;
+    border-color: #c4c4c4;
+    border-radius: 0px 0px 5px 5px;
+    height: 64px;
+    width: 172px;
+    align-items: center;
+    justify-content: center;
+}
+
+.name-productstore {
+    color: #000000;
+    font-family: Inter, Lato, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    height: 26px;
+    letter-spacing: 0.46px;
+    line-height: 26px;
+}
+
+.actions-container-productstore{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.container-icons-productstore{
+    width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.edit-productstore{
+    color: #4F6F52;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 40px;
+}
+
+.edit-productstore:hover{
+    font-size: 22px;
+}
+
+.delete-productstore{
+    color: #D32F2F;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 40px;
+}
+
+.delete-productstore:hover{
+    font-size: 22px;
+}
