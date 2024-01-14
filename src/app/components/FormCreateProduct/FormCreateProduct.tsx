@@ -17,10 +17,6 @@ export interface Producto{
 
 export interface  ProductoSend{
     storeId: any;
-    productoS: {
-        name: string|null;
-        thumbnail_url: string;
-    };
     onAccept: () => void;
 }
 
@@ -35,10 +31,10 @@ const validationSchema = Yup.object().shape({
         .required('Este campo es requerido')
 });
 
-const FormCreateProduct: React.FC<ProductoSend>=({storeId,productoS,onAccept}) => {
+const FormCreateProduct: React.FC<ProductoSend>=({storeId,onAccept}) => {
     const initialValues = {
-        name: productoS.name,
-        thumbnail_url: productoS.thumbnail_url
+        name: '',
+        thumbnail_url: ''
     };
 
     const [isSuccessModalOpen, setIsSuccessModalOpen] = React.useState(false);
@@ -52,7 +48,7 @@ const FormCreateProduct: React.FC<ProductoSend>=({storeId,productoS,onAccept}) =
           values = { ...values, thumbnail_url: newImageUrl };
           const JSONval=JSON.stringify(values)
           console.log(JSONval)
-          const response =await axios.put('http://localhost:3000/api/CreateProduct?store_id='+ProductoIDS,JSONval)
+          const response =await axios.post('http://localhost:3000/api/CreateProduct?store_id='+ProductoIDS,JSONval)
           console.log(response)
           setIsSuccessModalOpen(true);
         } catch (error) {
@@ -61,7 +57,7 @@ const FormCreateProduct: React.FC<ProductoSend>=({storeId,productoS,onAccept}) =
         }
     };
 
-    const [newImageUrl, setNewImageUrl] = React.useState(productoS.thumbnail_url);
+    const [newImageUrl, setNewImageUrl] = React.useState('https://www.ncenet.com/wp-content/uploads/2020/04/no-image-png-2.png');
     const [isCancelConfirmationOpen, setIsCancelConfirmationOpen] = React.useState(false);
     const handleCancel = () => {
         setIsCancelConfirmationOpen(true);
@@ -71,23 +67,17 @@ const FormCreateProduct: React.FC<ProductoSend>=({storeId,productoS,onAccept}) =
     return(
         <Formik
             initialValues={initialValues}
-            validationSchema={validationSchema}
             onSubmit={values =>{
-                console.log('Formik onSubmit values:', values);
-                console.log(storeId);
                 handleSubmit(storeId,values);
                 console.log(values);
             }}
-            enableReinitialize={true}
+            validator={() => ({})}
         >
-            {() => {
-            console.log('FormCreateProduct is rendering');
-            return (
         <>
         <SForm>
             <Cdiv>
                 <Ddiv>
-                    <Img2Edit src={newImageUrl} alt="imagentienda" className='IA-contentimagen' />
+                    <Img2Edit src={newImageUrl || 'https://www.ncenet.com/wp-content/uploads/2020/04/no-image-png-2.png'} alt="imagentienda" className='IA-contentimagen' />
                     <Ibutton onClick={handleImage}>CAMBIAR IMAGEN</Ibutton>
                 </Ddiv>
                 <Ddiv>
@@ -106,7 +96,7 @@ const FormCreateProduct: React.FC<ProductoSend>=({storeId,productoS,onAccept}) =
             </Cdiv>
         </SForm>
 
-        {isSuccessModalOpen && <Success onClose={() => {setIsSuccessModalOpen(false); window.location.reload()}} successProps={{ message: 'Se ha modificado exitosamente la información del producto' }} />}
+        {isSuccessModalOpen && <Success onClose={() => {setIsSuccessModalOpen(false); window.location.reload()}} successProps={{ message: 'Se ha creado exitosamente el producto' }} />}
         {isImageModalOpen && (
             <ImageModal
                 onClose={() => setIsImageModalOpen(false)}
@@ -123,13 +113,11 @@ const FormCreateProduct: React.FC<ProductoSend>=({storeId,productoS,onAccept}) =
             onClose={() => setIsCancelConfirmationOpen(false)}
             onAccept={() => {
                 setIsCancelConfirmationOpen(false);
-                setNewImageUrl(productoS.thumbnail_url);
+                setNewImageUrl('https://www.ncenet.com/wp-content/uploads/2020/04/no-image-png-2.png');
                 onAccept();
             }}
             />)}
       </>
-      );
-    }}
         </Formik>
     )
 }

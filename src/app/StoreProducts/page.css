@@ -46,7 +46,7 @@
 .container-div-sinproductos-storeproducts{
     width: 100%;
     display: flex;
-    margin-top: 20px;
+    margin-top: 40px;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -94,4 +94,25 @@
     max-width: 1200px; 
     align-items: center;
     margin-top: 20px;
+}
+
+.cargando-storeproducts{
+    width: 100%;
+}
+
+.container-cargando-storeproducts{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.icon-cargando-storeproducts{
+    font-size: 200px;
+    color:#4F6F52;
+}
+
+.h1-cargando-storeproducts{
+    color:#4F6F52;
 }
