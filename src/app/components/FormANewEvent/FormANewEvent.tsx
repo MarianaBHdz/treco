@@ -35,11 +35,11 @@ const validationSchema = Yup.object().shape({
   name: Yup.string()
     .required('Este campo es requerido'),
   start_date: Yup.date()
-    .min(onehoundredYearsAgo, 'Debes ser menor a 100 años')
+    .min(onehoundredYearsAgo, 'Debe ser menor a 100 años')
     .max(seventeenYearsAgo, 'Debe ser del año en curso en adelante')
     .required('Este campo es requerido'),
   finish_date: Yup.date()
-    .min(onehoundredYearsAgo, 'Debes ser menor a 100 años')
+    .min(onehoundredYearsAgo, 'Debe ser menor a 100 años')
     .max(seventeenYearsAgo, 'Debe ser del año en curso en adelante')
     .required('Este campo es requerido'),
   start_schedule: Yup.string()
@@ -61,7 +61,7 @@ const FormCInformation: React.FC<EventSend>= ({eventS,onAccept,userID}) => {
     datefinish='01/01/2023'
   }
   const initialValues = {
-    nombreApellido: eventS.name,
+    nameEvent: '',
     start_date: new Date(datestart),
     finish_date: new Date(datefinish),
     start_schedule: eventS.start_schedule,
@@ -154,7 +154,7 @@ const FormCInformation: React.FC<EventSend>= ({eventS,onAccept,userID}) => {
           </DivSend>
         </SForm>
         
-        {isSuccessModalOpen && <SuccessPerfil onClose={() => {setIsSuccessModalOpen(false);onAccept();window.location.reload();}} />}
+        {isSuccessModalOpen && <SuccessPerfil onClose={() => {setIsSuccessModalOpen(false);onAccept();window.location.reload();}} successMessage=''/>}
         {isCancelConfirmationOpen && (
         <CancelConfirmation
       onClose={() => setIsCancelConfirmationOpen(false)}

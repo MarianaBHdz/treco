@@ -150,7 +150,7 @@ const FormCInformation: React.FC<UserSend>= ({userS,onAccept,userID}) => {
           </DivSend>
         </SForm>
         
-        {isSuccessModalOpen && <SuccessPerfil onClose={() => {setIsSuccessModalOpen(false);onAccept();window.location.reload();}} />}
+        {isSuccessModalOpen && <SuccessPerfil onClose={() => {setIsSuccessModalOpen(false);onAccept();window.location.reload();}} successMessage='Se ha modificado exitosamente la información.'/>}
         {isCancelConfirmationOpen && (
         <CancelConfirmation
       onClose={() => setIsCancelConfirmationOpen(false)}

@@ -10,12 +10,16 @@ import axios from 'axios';
 import FormCCoupons from '../components/FormCCoupons/FormCCoupons';
 import RWDModal from "../components/ModalPopup/RWDModal";
 import ModifyUser from '../components/buttons/ModifyUser';
+import { useSession } from '../components/context/SessionContext';
+
 
 
 
 export default function ClientCoupons() {
   const router = useRouter();
-
+  const { sessionId } = useSession();
+  console.log('Id del usario');
+  console.log(sessionId);
   const { session } = useSupabase();
   const [user, setUser] = useState<any>();
 
@@ -26,7 +30,7 @@ export default function ClientCoupons() {
 
   useEffect(() => {
     //const userId = session?.user?.id;
-    axios.get('/api/User?user_id=FFWEE344F4S')
+    axios.get('/api/User?user_id='+sessionId)
       .then((response: any) => {
         console.log(response.data.user);
         setUser(response.data.user);
@@ -51,7 +55,7 @@ export default function ClientCoupons() {
 					</div>
 				</div>
         <div className='buttons-container-ccoupons'>
-          <RWDModal header="Calcular cupones"onBackdropClick={toggleModal} isModalVisible={isModalVisible} message="* Campos obligatorios" content={<FormCCoupons userS={user} onAccept={toggleModal} userID={'FFWEE344F4S'}/>}/>
+          <RWDModal header="Calcular cupones"onBackdropClick={toggleModal} isModalVisible={isModalVisible} message="* Campos obligatorios" content={<FormCCoupons userS={user} onAccept={toggleModal} userID={sessionId || undefined}/>}/>
           <ModifyUser text='CALCULAR CUPONES' onClick={toggleModal}/>
           <div id = "modal-root"></div>
         </div>

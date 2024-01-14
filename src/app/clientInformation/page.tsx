@@ -16,7 +16,7 @@ export default function ClientInformation() {
   const router = useRouter();
   const { sessionId } = useSession();
   console.log('Id del usario');
-console.log(sessionId);
+  console.log(sessionId);
   const { session } = useSupabase();
   const [user, setUser] = useState<any>();
 
@@ -51,7 +51,7 @@ console.log(sessionId);
         <DataView datanum={1} dataname='Correo electrónico' datainformation={user?.email} />
         <DataView datanum={1} dataname='Fecha de nacimiento' datainformation={date}/>
         <DataView datanum={1} dataname='CURP' datainformation={user?.CURP}/>
-        <RWDModal header="Modificar Perfil"onBackdropClick={toggleModal} isModalVisible={isModalVisible} message="* Campos obligatorios" content={<Formperfil userS={user} onAccept={toggleModal} userID={'FFWEE344F4S'}/>}/>
+        <RWDModal header="Modificar Perfil"onBackdropClick={toggleModal} isModalVisible={isModalVisible} message="* Campos obligatorios" content={<Formperfil userS={user} onAccept={toggleModal} userID={sessionId||undefined}/>}/>
         <ModifyUser text='Modificar' onClick={toggleModal}/>
         <div id = "modal-root"></div>
       </div>

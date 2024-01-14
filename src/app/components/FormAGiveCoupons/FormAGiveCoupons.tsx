@@ -2,12 +2,15 @@ import { Formik, Field, ErrorMessage,FieldProps} from 'formik';
 import { useState } from 'react';
 import React from 'react';
 import * as Yup from 'yup';
-import { SForm, Slabel, SField, SErrorMessage ,Cbutton,Sbutton,DivSend,Ddiv,Ibutton,DdivLarge,DivAdj,Cdiv,SAsterisk,DivAdj2} from './FormCCoupons.style';
+import { SForm, Slabel, SField, SErrorMessage ,Cbutton,Sbutton,DivSend,Ddiv,Ibutton,DdivLarge,DivAdj,Cdiv,SAsterisk,DivAdj2} from './FormAGiveCoupons.style';
 import {RecyclingIdeas} from '../ideas/RecyclingIdeas';
 import CancelConfirmation from '../confirmations/CancelConfirmation';
+import ConfirmationConfirmation from '../confirmations/ConfirmationConfirmation';
+import {SuccessPerfil} from '../confirmations/SuccessPerfil';
 import axios from 'axios';
 
 export interface User {
+  id: string;
   name: string;
   email: string;
   date_of_birth?: string;
@@ -25,9 +28,14 @@ export interface UserSend {
 }
 
 const quantityMRegExp = /^[0-9]{1,3}[.][0-9]{1,3}$/;
-
+const idUserFRegExp = /^[0-9]{21}$/
 
 const validationSchema = Yup.object().shape({
+  idUserF: Yup.string()
+    .matches(idUserFRegExp, 'Debe ingresar un ID válido')
+    .min(21, 'Debe haber 21 numeros')
+    .max(21, 'Debe haber 21 numeros')
+    .required('Este campo es requerido'),
   material: Yup.string()
     .required('Este campo es requerido'),
   quantityM: Yup.string()
@@ -36,7 +44,7 @@ const validationSchema = Yup.object().shape({
   unitM: Yup.number()
     .required('Este campo es requerido'),
 });
-const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => { 
+const FormAGiveCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => { 
   const materialM =[
     { value: 1, label: 'Aluminio' },
     { value: 2, label: 'Botellas de vidrio' },
@@ -57,9 +65,10 @@ const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => {
   ];
 
   const initialValues = {
-    nombreApellido: userS.name,
-    fechaNacimiento: userS.date_of_birth,
-    CURP: userS.CURP,
+    idUserF:'',
+    nombreApellido: userS.name || '',
+    fechaNacimiento: userS.date_of_birth || '',
+    CURP: userS.CURP || '',
     material: 0,
     quantityM: '',
     unitM: 0,
@@ -73,7 +82,7 @@ const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => {
       console.log(UserIDS)
       const response =await axios.put('/api/modificaperfil?user_id='+UserIDS,JSONval)
       console.log(response)
-      setIsSuccessModalOpen(true);
+      //setIsSuccessModalOpen(true);
     } catch (error) {
       console.error(error);
       // Manejo de errores
@@ -82,6 +91,10 @@ const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => {
   const [isCancelConfirmationOpen, setIsCancelConfirmationOpen] = React.useState(false);
   const handleCancel = () => {
     setIsCancelConfirmationOpen(true);
+  };
+  const [isConfirmationConfirmationOpen, setIsConfirmationConfirmationOpen] = React.useState(false);
+  const handleAcept = () => {
+    setIsConfirmationConfirmationOpen(true);
   };
 
   return (
@@ -93,7 +106,7 @@ const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => {
         //console.log('Estos son los que se envian',values)
 
         // Get the values from the form
-        const { unitM, quantityM, material } = values;
+        const { unitM, quantityM, material, idUserF } = values;
         let calculatedNumCoupons = 0;
 
         if (unitM == 1) { //piezas
@@ -155,10 +168,10 @@ const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => {
           }
         }
         // Asignamos el valor calculado a numCoupons en los valores del formulario
-        const updatedValues = { ...values, unitM: calculatedNumCoupons };
+        const updatedValues = { ...values, numCoupons: calculatedNumCoupons };
 
         // Llamamos a la función handleSubmit con los valores actualizados
-        handleSubmit(userID, updatedValues); // <-- Aquí deberías enviar updatedValues
+        handleSubmit(idUserF, updatedValues); // <-- Aquí deberías enviar updatedValues
 
         console.log('Estos son los que se envian', updatedValues);
       }}
@@ -169,6 +182,8 @@ const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => {
         <SForm>
           <Cdiv>
             <Ddiv>
+                <Slabel htmlFor="idUserF">Número de usuario<SAsterisk>*</SAsterisk></Slabel>
+                <DivAdj></DivAdj>
                 <Slabel htmlFor="material">Selecciona un material<SAsterisk>*</SAsterisk></Slabel>
                 <DivAdj></DivAdj>
                 <DivAdj></DivAdj>
@@ -180,6 +195,11 @@ const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => {
             </Ddiv>
 
             <Ddiv>
+              <SField type="text" id="idUserF" name="idUserF" />
+              <SErrorMessage name="idUserF" component="div" />
+              <DivAdj2></DivAdj2>
+
+
               <SField
                 as="select"
                 id="material"
@@ -220,29 +240,38 @@ const FormCCoupons: React.FC<UserSend>= ({userS,onAccept,userID}) => {
                 ))}
               </SField>
               <SErrorMessage name="unitM" component="div" />
-              <DivAdj2></DivAdj2>
             </Ddiv>
           </Cdiv>
             
             <DivSend>
-              <Sbutton type="submit">ACEPTAR</Sbutton>
+              <Sbutton onClick={handleAcept}>ACEPTAR</Sbutton>
               <Cbutton onClick={handleCancel}>CANCELAR</Cbutton>
             </DivSend>
         </SForm>
         
-        {isSuccessModalOpen && <RecyclingIdeas onClose={() => {setIsSuccessModalOpen(false);onAccept();window.location.reload();}} />}
+        {isSuccessModalOpen && <SuccessPerfil onClose={() => {setIsSuccessModalOpen(false);onAccept();window.location.reload();}} successMessage='...'/>}
+        {isConfirmationConfirmationOpen && (
+          <ConfirmationConfirmation
+            onClose={() => setIsConfirmationConfirmationOpen(false)}
+            onAccept={() => {
+              setIsConfirmationConfirmationOpen(false);
+              onAccept();
+            }}
+            confirmationMessage='¿Está seguro que quiere otorgar los cupones?'
+            successMessage='Se han otorgado exitosamente los cupones.'
+        />)}
         {isCancelConfirmationOpen && (
-        <CancelConfirmation
-        onClose={() => setIsCancelConfirmationOpen(false)}
-        onAccept={() => {
-          setIsCancelConfirmationOpen(false);
-          onAccept();
-        }}
-    />)}
+          <CancelConfirmation
+            onClose={() => setIsCancelConfirmationOpen(false)}
+            onAccept={() => {
+              setIsCancelConfirmationOpen(false);
+              onAccept();
+            }}
+        />)}
         </>
       )}
     </Formik>
   );
 };
 
-export default FormCCoupons;
+export default FormAGiveCoupons;

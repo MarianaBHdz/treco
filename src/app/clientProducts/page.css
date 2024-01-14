@@ -6,7 +6,7 @@ html, body {
   font-size: 20px;
   background-color: #ffffff;
   font-family: Inter, Lato, sans-serif;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 .cargando-Proofile {
   font-family: Inter, Lato, sans-serif;
@@ -38,4 +38,18 @@ html, body {
   width: auto;
   height: auto;
   margin-left: 4vh;
+}
+.content-cproducts {
+  display: flex;
+  min-height: fit-content;
+  width: 100%;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.productos {
+  display: grid;
+  grid-template-columns: 219px 219px 219px 219px 219px;
+  column-gap: 15px;
+  row-gap: 10px;
 }

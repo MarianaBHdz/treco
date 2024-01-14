@@ -8,6 +8,8 @@ import DataViewS from '../components/DataViewS/DataViewS';
 import DataView from '../components/DataView/DataView';
 import ProductClientV from '../components/ProductClientV/ProductClientV';
 import { useSearchParams } from 'next/navigation';
+import { FaMagnifyingGlass } from "react-icons/fa6";
+import { TbMoodSad } from "react-icons/tb";
 import axios from 'axios';
 
 
@@ -18,7 +20,6 @@ export default function ClientProducts() {
   const [load,setLoad] = useState(true);
   const id = parseInt(searchParams?.get('id')!);
   const [plength,setLength] = useState(0);
-  console.log('ESTE ES',storeJson);
   
   useEffect(() => {
     axios.get('http://localhost:3000/api/Stores?id='+id)
@@ -31,15 +32,24 @@ export default function ClientProducts() {
     });
     axios.get('http://localhost:3000/api/Products/productStore?id='+id)
       .then((response) => {
-        console.log(response.data);
+        console.log("ESTE ES EL ARRAY DE PRODUCTOS",response.data);
         setProducts(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-    }, []);
 
-  const router = useRouter();
+  }, []);
+
+    useEffect(() => {
+      // Establecer la longitud de todos los productos de la tienda
+      if (productsJson && productsJson.products) {
+        setLength(productsJson.products.length);
+        console.log("ESTE ES EL PLENGTH", plength);
+        setLoad(false);
+      }
+    }, [productsJson]);
+
   return (
     <div className='main-container-cproducts'>
       <div className='store-container-cproducts'>
@@ -60,7 +70,36 @@ export default function ClientProducts() {
       </div>
 
 			<div className='content-cproducts'>
-        <ProductClientV dataimages='https://www.eluniversal.com.mx/resizer/5kl1QZyQz0jtnP4dkVOr6VT2m9s=/1100x666/cloudfront-us-east-1.images.arcpublishing.com/eluniversal/XDWXI53B5ZDMBOSX3KMZLBRS6A.jpg' dataname='Jitomates'/>
+        {load ? (
+          <div className='notFound'>
+            <FaMagnifyingGlass />
+            <h1>Buscando.....</h1>
+          </div>
+        ) : (
+          <div>
+            {plength === 0 ? (
+              <div className='notFound'>
+                <TbMoodSad />
+                <h1>¡Oh no! Lo sentimos, no encontramos ningún resultado ¿Intenta quitar algunos filtros?</h1>
+              </div>
+            ) : (
+              <div className='productos'>
+                {productsJson && productsJson.products.map((product: any) => {
+                  //const productImages = product.product_images.map((image: any) => {
+                  //  return image.image_url;
+                  //});
+                  return (
+                    <ProductClientV
+                      id={product.id}
+                      dataimages={product.thumbnail_url}
+                      dataname={product.name}
+                    />
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
 			</div>
         
     </div>

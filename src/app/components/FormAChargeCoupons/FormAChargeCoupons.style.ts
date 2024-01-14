@@ -9,7 +9,7 @@ export const SForm = styled(Form)`
   justify-items: center;
 `;
 export const SField = styled(Field)`
-  height: 10%;
+  height: 25%;
   font-size: 17px;
   display: inline-block;
   border: 1px solid #ccc;

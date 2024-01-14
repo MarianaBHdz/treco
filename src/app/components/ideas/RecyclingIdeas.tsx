@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useSupabase } from '../../supabase-provider';
 import DataViewS from '../DataViewS/DataViewS';
+import { useSession } from '../context/SessionContext';
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -130,7 +131,7 @@ const GeneralP = styled.p`
 
 export const RecyclingIdeas: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const router = useRouter();
-
+  const { sessionId } = useSession();
   const { session } = useSupabase();
   const [user, setUser] = useState<any>();
 
@@ -140,7 +141,7 @@ export const RecyclingIdeas: React.FC<{ onClose: () => void }> = ({ onClose }) =
   }
   useEffect(() => {
     //const userId = session?.user?.id;
-    axios.get('/api/User?user_id=FFWEE344F4S')
+    axios.get('/api/User?user_id='+sessionId)
       .then((response: any) => {
         console.log(response.data.user);
         setUser(response.data.user);
