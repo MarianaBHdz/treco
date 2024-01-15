@@ -8,6 +8,9 @@ import axios from 'axios';
 import {useEffect, useState} from 'react';
 import FormStore from '../components/FormSInformation/FormSInformation';
 import RWDModal from '../components/ModalPopup/RWDModal';
+import ModifyUser from '../components/buttons/ModifyUser';
+import FormAChargeCoupons from '../components/FormAChargeCoupons/FormAChargeCoupons';
+import { useSupabase } from '../supabase-provider';
 
 export default function MiTienda() {
   const {sessionId} = useSession();
@@ -18,6 +21,17 @@ export default function MiTienda() {
     setIsModalVisible(wasModalVisible => !wasModalVisible)
   }
 
+  const { session } = useSupabase();
+  const [user, setUser] = useState<any>();
+
+  const [isModalVisible1, setIsModalVisible1] = useState(false)
+  const toggleModal1 = () => {
+    setIsModalVisible1(wasModalVisible => !wasModalVisible)
+  }
+  const [isModalVisible2, setIsModalVisible2] = useState(false)
+  const toggleModal2 = () => {
+    setIsModalVisible2(wasModalVisible => !wasModalVisible)
+  }
   useEffect(() => {
     axios.get('/api/User/store?user_id='+sessionId)
     .then((response)=>{
@@ -28,6 +42,18 @@ export default function MiTienda() {
       console.log(error);
     })
   },[]);
+
+  useEffect(() => {
+    //const userId = session?.user?.id;
+    axios.get('/api/User?user_id='+sessionId)
+      .then((response: any) => {
+        console.log(response.data.user);
+        setUser(response.data.user);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  }, [session]);
 
   return (
     <div className='container-mitienda'>
@@ -55,8 +81,11 @@ export default function MiTienda() {
             <button className='button-mitienda' onClick={() => {router.push('/StoreProducts');}}>Productos</button>
         </div>
         <div className='button-container-mitienda'>
-            <button className='button-mitienda' onClick={() => {router.push('/CobrarCupones');}}>Cobrar cupones</button>
+          <RWDModal header="Cobrar cupones"onBackdropClick={toggleModal2} isModalVisible={isModalVisible2} message="* Campos obligatorios" content={<FormAChargeCoupons userS={user} onAccept={toggleModal2} userID={sessionId || undefined}/>}/>
+          <ModifyUser text='COBRAR CUPONES' onClick={toggleModal2}/>
+          <div id = "modal-root"></div>
         </div>
+       
       </div>
 
     </div>
